@@ -1,0 +1,13 @@
+{
+  "name": "Cabinet David Brenet",
+  "short_name": "David Brenet IA",
+  "description": "Cabinet spécialisé en Intelligence Artificielle — Stratégie, Gouvernance & Déploiement",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0F1E",
+  "theme_color": "#06B6D4",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
