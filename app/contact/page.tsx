@@ -19,6 +19,8 @@ export default function ContactPage() {
     firstName: '', lastName: '', company: '', role: '', email: '', phone: '', subject: '', message: ''
   })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -26,9 +28,21 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: Intégrer votre service d'envoi d'email (Resend, Mailgun, etc.)
-    // Exemple avec Resend: POST /api/contact
-    setSubmitted(true)
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error()
+      setSubmitted(true)
+    } catch {
+      setError("Une erreur est survenue. Veuillez réessayer ou contacter directement brenet.david@gmail.com")
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (submitted) {
@@ -312,9 +326,15 @@ export default function ContactPage() {
                     </label>
                   </div>
 
-                  <button type="submit" className="btn-primary w-full justify-center text-base py-4">
-                    Envoyer ma demande
-                    <Send size={18} />
+                  {error && (
+                    <p className="text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
+                      {error}
+                    </p>
+                  )}
+
+                  <button type="submit" disabled={loading} className="btn-primary w-full justify-center text-base py-4 disabled:opacity-60 disabled:cursor-not-allowed">
+                    {loading ? 'Envoi en cours...' : 'Envoyer ma demande'}
+                    {!loading && <Send size={18} />}
                   </button>
                 </form>
               </div>
