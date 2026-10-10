@@ -155,9 +155,9 @@ export default function HomePage() {
               </h1>
 
               <p className="text-xl text-slate-400 leading-relaxed max-w-2xl mb-10">
-                Je forme les équipes IT et métiers des entreprises de tous secteurs —
+                Je forme les équipes IT et métiers des entreprises de tous secteurs
                 et j&apos;accompagne le déploiement de leurs agents Claude, Gemini et Copilot.
-                <strong className="text-slate-300"> 23 ans en IT, 2 livres ENI, enseignant CNAM.</strong>
+                <strong className="text-slate-300"> 23 ans en IT, 2 ouvrages de référence ENI, enseignant CNAM.</strong>
               </p>
 
               {/* CTA */}
@@ -176,7 +176,7 @@ export default function HomePage() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {[
                   { value: '23 ans', label: 'en innovation IT, Data & IA', icon: Award },
-                  { value: '2 livres', label: 'publiés aux Éd. ENI', icon: BookOpen },
+                  { value: '2 ouvrages', label: 'de référence Éd. ENI', icon: BookOpen },
                   { value: '8 000+', label: 'exemplaires vendus', icon: Award },
                   { value: 'CNAM · CESI · Orsys', label: 'enseignant', icon: GraduationCap },
                 ].map(({ value, label, icon: Icon }) => (
@@ -199,17 +199,19 @@ export default function HomePage() {
                   className="rounded-full object-cover w-36 h-36 ring-4 ring-cyan-500/40"
                 />
                 <div className="text-center">
-                  <div className="text-xl font-bold text-slate-100 mb-1">David Brenet</div>
-                  <div className="text-sm text-slate-400 leading-snug mb-4">
-                    Expert IA Agentique · Formateur Orsys · Auteur ENI
+                  <div className="text-xl font-bold text-slate-100 mb-2">David Brenet</div>
+                  <div className="flex flex-wrap justify-center gap-1.5 mb-5">
+                    {['Expert IA Agentique', 'Responsable DATA/IA', 'Enseignant formateur', 'Auteur'].map(tag => (
+                      <span key={tag} className="text-xs bg-slate-800 text-cyan-400 border border-slate-700 rounded-full px-2.5 py-1 font-medium">{tag}</span>
+                    ))}
                   </div>
-                  <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-3 py-1.5 text-xs text-cyan-400 font-medium mb-5">
-                    <Award size={12} />
-                    23 ans d&apos;expérience en innovation IT, Data &amp; IA
+                  <div className="inline-flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-3 py-1.5 text-xs text-cyan-400 font-medium mb-5">
+                    <Award size={11} />
+                    23 ans en innovation IT, Data &amp; IA
                   </div>
                   <div className="flex justify-center">
                     <a
-                      href="https://www.linkedin.com/in/davidbrenet/"
+                      href="https://www.linkedin.com/in/david-brenet-ia/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/30 rounded-lg px-4 py-2 text-blue-400 text-sm font-medium hover:bg-blue-600/30 transition-colors"
@@ -485,10 +487,10 @@ export default function HomePage() {
                 </thead>
                 <tbody className="divide-y divide-slate-800/50">
                   {[
-                    { activite: 'Production de code', sub: 'Génération de fonctions à chaud', kpi: '2,2 j/h par US', eligibilite: 'Génération de code', theorique: '+50% gain de temps', reel: '+23%', reelColor: 'text-emerald-400' },
-                    { activite: 'Revue de code', sub: 'Passage dans Claude ou Copilot', kpi: '0,3 j/h par US', eligibilite: 'Revue de code', theorique: '+33% gain de temps', reel: 'En cours', reelColor: 'text-amber-400' },
-                    { activite: 'Documentation', sub: 'Génération depuis le code source', kpi: '1 j/h par US', eligibilite: 'Génération de texte', theorique: '+30% gain de temps', reel: 'En cours', reelColor: 'text-amber-400' },
-                    { activite: 'Fusion de code (merge)', sub: 'Prévisualisation IA des conflits', kpi: '1 j/h par US', eligibilite: 'Gestion des conflits', theorique: '+20% gain de temps', reel: 'En cours', reelColor: 'text-amber-400' },
+                    { activite: 'Production de code', sub: 'Génération de fonctions à chaud', kpi: '2,2 j/h', eligibilite: 'Génération de code (Copilot)', theorique: '+50% gain de temps', reel: '+23%', reelColor: 'text-emerald-400' },
+                    { activite: 'Revue de code', sub: 'Passage dans Claude ou Copilot', kpi: '0,3 j/h', eligibilite: 'Revue de code', theorique: '+33% gain de temps', reel: '+18%', reelColor: 'text-emerald-400' },
+                    { activite: 'Documentation', sub: 'Génération depuis le code source', kpi: '1 j/h', eligibilite: 'Génération de texte', theorique: '+30% gain de temps', reel: '+25%', reelColor: 'text-emerald-400' },
+                    { activite: 'Fusion de code (merge)', sub: 'Prévisualisation IA des conflits', kpi: '1 j/h', eligibilite: 'Gestion des conflits', theorique: '+20% gain de temps', reel: 'En cours', reelColor: 'text-amber-400' },
                   ].map(({ activite, sub, kpi, eligibilite, theorique, reel, reelColor }) => (
                     <tr key={activite} className="hover:bg-slate-800/30 transition-colors">
                       <td className="py-3 pr-4">
@@ -517,9 +519,18 @@ export default function HomePage() {
             <div className="cyan-line mx-auto mb-5" />
             <h2 className="section-title mb-4">La preuve par l&apos;écrit</h2>
             <p className="section-subtitle max-w-xl mx-auto">
-              Deux ouvrages aux Éditions ENI, la référence en informatique professionnelle.
-              Plus de 8 000 exemplaires vendus.
+              Deux ouvrages de référence aux Éditions ENI. Plus de 8 000 exemplaires vendus.
             </p>
+            <div className="flex items-center justify-center gap-2 mt-4">
+              <div className="flex text-amber-400">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                ))}
+              </div>
+              <span className="text-sm text-amber-400 font-semibold">5/5</span>
+              <span className="text-sm text-slate-500">73 avis Amazon</span>
+              <span className="text-xs text-slate-600 bg-slate-800 px-2 py-0.5 rounded-full">Top ventes Amazon IA</span>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">

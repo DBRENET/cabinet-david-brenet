@@ -18,13 +18,14 @@ const RESOURCE_DOWNLOAD_URLS: Record<string, string> = {
 
 export async function POST(req: Request) {
   const body = await req.json()
-  const { email, resource } = body
+  const { email, resource, firstName, lastName, company, role } = body
 
   if (!email || !email.includes('@')) {
     return NextResponse.json({ error: 'Email invalide' }, { status: 400 })
   }
 
   const resourceLabel = RESOURCE_LABELS[resource] ?? resource ?? 'Non précisé'
+  const fullName = [firstName, lastName].filter(Boolean).join(' ') || 'Non renseigné'
 
   // ── 1. Notification par email via Resend ─────────────────────────────────
   const resend = new Resend(process.env.RESEND_API_KEY)
@@ -32,29 +33,44 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: 'Cabinet David Brenet <contact@davidbrenet.com>',
       to: 'brenet.david@gmail.com',
-      subject: `📥 Nouvelle demande de ressource — ${resourceLabel}`,
+      subject: `📥 Nouvelle demande — ${resourceLabel} (${fullName})`,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto;">
-          <h2 style="color: #0ea5e9; border-bottom: 2px solid #0ea5e9; padding-bottom: 8px;">
-            Nouvelle demande de ressource
-          </h2>
-          <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
-            <tr>
-              <td style="padding: 8px 0; color: #64748b; width: 140px;"><strong>Email</strong></td>
-              <td style="padding: 8px 0;"><a href="mailto:${email}">${email}</a></td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #64748b;"><strong>Ressource</strong></td>
-              <td style="padding: 8px 0;">${resourceLabel}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #64748b;"><strong>Date</strong></td>
-              <td style="padding: 8px 0;">${new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })}</td>
-            </tr>
-          </table>
-          <p style="color: #94a3b8; font-size: 12px; margin-top: 24px;">
-            Reçu depuis davidbrenet.com/ressources
-          </p>
+        <div style="font-family: Arial, sans-serif; max-width: 540px; margin: 0 auto;">
+          <div style="background: #0f172a; padding: 20px 28px; border-bottom: 3px solid #06b6d4;">
+            <h2 style="color: #06b6d4; margin: 0; font-size: 18px;">📥 Nouvelle demande de ressource</h2>
+          </div>
+          <div style="padding: 24px 28px; background: #ffffff;">
+            <h3 style="color: #0f172a; margin: 0 0 16px; font-size: 15px;">Profil du contact</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 0 0 20px;">
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 9px 0; color: #64748b; width: 130px; font-size: 13px;"><strong>Prénom</strong></td>
+                <td style="padding: 9px 0; font-size: 13px;">${firstName || '<em style="color:#94a3b8">Non renseigné</em>'}</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 9px 0; color: #64748b; font-size: 13px;"><strong>Nom</strong></td>
+                <td style="padding: 9px 0; font-size: 13px;">${lastName || '<em style="color:#94a3b8">Non renseigné</em>'}</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 9px 0; color: #64748b; font-size: 13px;"><strong>Email</strong></td>
+                <td style="padding: 9px 0; font-size: 13px;"><a href="mailto:${email}" style="color: #0891b2;">${email}</a></td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 9px 0; color: #64748b; font-size: 13px;"><strong>Entreprise</strong></td>
+                <td style="padding: 9px 0; font-size: 13px;">${company || '<em style="color:#94a3b8">Non renseigné</em>'}</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f1f5f9;">
+                <td style="padding: 9px 0; color: #64748b; font-size: 13px;"><strong>Fonction</strong></td>
+                <td style="padding: 9px 0; font-size: 13px;">${role || '<em style="color:#94a3b8">Non renseigné</em>'}</td>
+              </tr>
+            </table>
+            <h3 style="color: #0f172a; margin: 0 0 12px; font-size: 15px;">Ressource demandée</h3>
+            <div style="background: #f0f9ff; border-left: 4px solid #06b6d4; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px;">
+              <p style="margin: 0; font-size: 14px; color: #0f172a; font-weight: bold;">${resourceLabel}</p>
+            </div>
+            <p style="color: #64748b; font-size: 12px; margin: 0;">
+              Reçu le ${new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })} depuis davidbrenet.com/ressources
+            </p>
+          </div>
         </div>
       `,
     })

@@ -4,17 +4,17 @@ import { ArrowRight, Clock, Tag, Rss } from 'lucide-react'
 import { NewsletterForm } from '@/components/NewsletterForm'
 
 export const metadata: Metadata = {
-  title: 'Blog — IA Agentique, Claude & Assurance | David Brenet',
+  title: 'Blog — IA Agentique, Claude, Gemini & Copilot | David Brenet',
   description:
-    'Articles de fond sur l\'IA agentique, Claude Anthropic et la transformation des assureurs et mutuelles. Gouvernance AI Act, agents IA en production, MCP — par David Brenet, expert IA assurance Niort.',
+    'Articles de fond sur l\'IA agentique, Claude, Gemini, Copilot et la transformation des entreprises. Gouvernance AI Act, agents IA en production, prompting, MCP — par David Brenet, expert IA.',
   alternates: { canonical: 'https://davidbrenet.com/blog' },
 }
 
 const articles = [
   {
     slug: 'claude-code-dsi-assureur',
-    title: 'Claude Code en DSI d\'assureur : retour d\'expérience après 3 mois',
-    excerpt: 'Comment Claude Code transforme le quotidien des équipes IT dans une DSI d\'assureur : revue de code automatisée, génération de tests, documentation de legacy. Ce que ça change vraiment.',
+    title: 'Claude Code en DSI : retour d\'expérience après 3 mois',
+    excerpt: 'Comment Claude Code transforme le quotidien des équipes IT : revue de code automatisée, génération de tests, documentation de legacy. Mesure avant/après sur une DSI de 40 développeurs.',
     date: '2026-09-15',
     readTime: '10 min',
     category: 'Claude',
@@ -23,15 +23,59 @@ const articles = [
     featured: true,
   },
   {
-    slug: 'mcp-connecter-agents-si-assurance',
-    title: 'MCP : comment connecter vos agents Claude à votre SI assurantiel',
+    slug: 'gemini-vs-claude-vs-copilot-entreprise',
+    title: 'Gemini, Claude ou Copilot : lequel choisir pour votre organisation en 2026 ?',
+    excerpt: 'Comparaison terrain des trois grands LLM d\'entreprise : sécurité des données, écosystème, coûts, gouvernance et cas d\'usage. Ce que j\'ai mesuré après 18 mois de déploiements.',
+    date: '2026-10-01',
+    readTime: '13 min',
+    category: 'Gemini & Copilot',
+    categoryColor: 'text-blue-400',
+    categoryBg: 'bg-blue-500/10',
+    featured: true,
+  },
+  {
+    slug: 'microsoft-copilot-entreprise-guide-dsi',
+    title: 'Microsoft Copilot en entreprise : le guide complet pour les DSI',
+    excerpt: 'Déploiement, gouvernance, sécurité et mesure du ROI de Microsoft 365 Copilot. Les erreurs à éviter, les cas d\'usage qui marchent vraiment, et comment articuler Copilot avec vos agents IA.',
+    date: '2026-09-28',
+    readTime: '12 min',
+    category: 'Gemini & Copilot',
+    categoryColor: 'text-blue-400',
+    categoryBg: 'bg-blue-500/10',
+    featured: false,
+  },
+  {
+    slug: 'google-gemini-workspace-agents-ia',
+    title: 'Google Gemini et Workspace : déployer des agents IA dans l\'écosystème Google',
+    excerpt: 'Gemini Advanced, Gemini for Workspace, Vertex AI Agents — comment exploiter le contexte long d\'1 million de tokens et les connecteurs natifs Google pour vos processus métier.',
+    date: '2026-09-20',
+    readTime: '11 min',
+    category: 'Gemini & Copilot',
+    categoryColor: 'text-blue-400',
+    categoryBg: 'bg-blue-500/10',
+    featured: false,
+  },
+  {
+    slug: 'mcp-connecter-agents-si',
+    title: 'MCP : comment connecter vos agents Claude à votre SI',
     excerpt: 'Le Model Context Protocol permet à Claude d\'accéder à vos API, GED et bases de données internes. Architecture, sécurité, cas d\'usage — le guide pratique pour les architectes SI.',
     date: '2026-08-28',
     readTime: '14 min',
     category: 'IA Agentique',
     categoryColor: 'text-purple-400',
     categoryBg: 'bg-purple-500/10',
-    featured: true,
+    featured: false,
+  },
+  {
+    slug: 'prompt-engineering-guide-pratique',
+    title: 'Prompt engineering : les 8 techniques qui changent vraiment la qualité des réponses',
+    excerpt: 'Chain-of-thought, few-shot learning, role prompting, structured output — les techniques de prompting avancé que j\'enseigne en formation, avec des exemples concrets pour chaque.',
+    date: '2026-08-18',
+    readTime: '11 min',
+    category: 'Prompting',
+    categoryColor: 'text-violet-400',
+    categoryBg: 'bg-violet-500/10',
+    featured: false,
   },
   {
     slug: 'agents-ia-gestion-sinistres',
@@ -47,7 +91,7 @@ const articles = [
   {
     slug: 'ia-act-guide-conformite-entreprise',
     title: 'AI Act article 4 : l\'obligation de formation IA que vous ne pouvez pas ignorer',
-    excerpt: 'Depuis août 2026, l\'article 4 du Règlement IA impose une formation obligatoire pour tout personnel utilisant l\'IA. Ce que cela signifie concrètement pour les assureurs et mutuelles.',
+    excerpt: 'Depuis août 2026, l\'article 4 du Règlement IA impose une formation obligatoire pour tout personnel utilisant l\'IA. Ce que cela signifie concrètement et comment s\'y conformer.',
     date: '2026-07-20',
     readTime: '12 min',
     category: 'Gouvernance & AI Act',
@@ -56,8 +100,19 @@ const articles = [
     featured: false,
   },
   {
-    slug: 'pourquoi-claude-plutot-que-gpt-assurance',
-    title: 'Pourquoi je recommande Claude plutôt que GPT pour l\'assurance',
+    slug: 'bibliotheque-prompts-strategie-entreprise',
+    title: 'Bibliothèque de prompts : comment transformer vos usages IA en actif stratégique',
+    excerpt: 'Une bibliothèque de prompts bien structurée réduit de 60% le temps nécessaire aux tâches IA récurrentes. Architecture, gouvernance et déploiement dans votre organisation.',
+    date: '2026-07-10',
+    readTime: '9 min',
+    category: 'Prompting',
+    categoryColor: 'text-violet-400',
+    categoryBg: 'bg-violet-500/10',
+    featured: false,
+  },
+  {
+    slug: 'pourquoi-claude-plutot-que-gpt',
+    title: 'Pourquoi je recommande Claude plutôt que GPT pour les agents IA en production',
     excerpt: 'Constitutional AI, gestion des données sensibles, écosystème Claude Code + MCP + SDK agents, politique de sécurité enterprise — les vraies raisons d\'un choix technique et éthique.',
     date: '2026-07-05',
     readTime: '9 min',
@@ -67,8 +122,8 @@ const articles = [
     featured: false,
   },
   {
-    slug: 'shadow-ia-risques-assurance',
-    title: 'Shadow IA en assurance : mesurer le risque avant qu\'il soit trop tard',
+    slug: 'shadow-ia-risques-entreprise',
+    title: 'Shadow IA en entreprise : mesurer le risque avant qu\'il soit trop tard',
     excerpt: 'Dans 80% des organisations, des collaborateurs utilisent des IA non validées avec des données sensibles. Comment détecter, quantifier et traiter ce risque avant un incident majeur.',
     date: '2026-06-18',
     readTime: '8 min',
@@ -79,7 +134,7 @@ const articles = [
   },
 ]
 
-const categories = ['Tous', 'IA Agentique', 'Claude', 'Assurance', 'Gouvernance & AI Act']
+const categories = ['Tous', 'IA Agentique', 'Claude', 'Gemini & Copilot', 'Prompting', 'Assurance', 'Gouvernance & AI Act']
 
 export default function BlogPage() {
   const featured = articles.filter(a => a.featured)
@@ -95,17 +150,17 @@ export default function BlogPage() {
             <div className="tag">Blog & Analyses</div>
             <div className="flex items-center gap-1.5 text-xs text-slate-500">
               <Rss size={12} />
-              <span>IA Agentique • Claude • Assurance</span>
+              <span>IA Agentique · Claude · Gemini · Copilot · Prompting</span>
             </div>
           </div>
           <div className="cyan-line mb-6" />
           <h1 className="text-5xl md:text-6xl font-bold text-slate-100 leading-tight mb-6">
             L&apos;IA agentique décryptée<br />
-            <span className="gradient-text">pour l&apos;assurance</span>
+            <span className="gradient-text">tous secteurs confondus</span>
           </h1>
           <p className="text-xl text-slate-400 leading-relaxed max-w-2xl">
-            Articles de fond, retours d&apos;expérience et analyses sur Claude, l&apos;IA agentique
-            et la transformation des assureurs et mutuelles. Sans jargon inutile.
+            Articles de fond, retours d&apos;expérience et comparatifs sur Claude, Gemini, Copilot
+            et l&apos;IA agentique. Avec des mesures réelles, sans jargon inutile.
           </p>
 
           {/* Categories */}
@@ -197,7 +252,7 @@ export default function BlogPage() {
           </h2>
           <p className="text-slate-400 mb-7 leading-relaxed">
             Recevez les prochains articles directement dans votre boîte mail.
-            Pas de spam — uniquement des analyses IA à forte valeur pour l&apos;assurance.
+            Analyses IA, comparatifs Claude / Gemini / Copilot, prompting et gouvernance.
           </p>
           <NewsletterForm
             resource="blog"

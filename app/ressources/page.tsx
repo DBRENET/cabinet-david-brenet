@@ -79,6 +79,10 @@ const resources = [
 
 function ResourceForm({ resource }: { resource: typeof resources[0] }) {
   const router = useRouter()
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [company, setCompany] = useState('')
+  const [role, setRole] = useState('')
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
@@ -90,7 +94,7 @@ function ResourceForm({ resource }: { resource: typeof resources[0] }) {
       const res = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, resource: resource.slug }),
+        body: JSON.stringify({ email, firstName, lastName, company, role, resource: resource.slug }),
       })
       if (!res.ok) throw new Error()
       router.push(`/ressources/merci?r=${resource.id}`)
@@ -99,15 +103,49 @@ function ResourceForm({ resource }: { resource: typeof resources[0] }) {
     }
   }
 
+  const inputClass = "w-full bg-navy-800/80 border border-slate-700/60 rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 focus:border-cyan-500 outline-none transition-colors"
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form onSubmit={handleSubmit} className="space-y-2.5">
+      <div className="grid grid-cols-2 gap-2.5">
+        <input
+          type="text"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          placeholder="Prénom"
+          required
+          className={inputClass}
+        />
+        <input
+          type="text"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          placeholder="Nom"
+          required
+          className={inputClass}
+        />
+      </div>
+      <input
+        type="text"
+        value={company}
+        onChange={(e) => setCompany(e.target.value)}
+        placeholder="Entreprise"
+        className={inputClass}
+      />
+      <input
+        type="text"
+        value={role}
+        onChange={(e) => setRole(e.target.value)}
+        placeholder="Fonction (ex : DSI, DRH, Directeur...)"
+        className={inputClass}
+      />
       <input
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="votre@email.fr"
         required
-        className="w-full bg-navy-800/80 border border-slate-700/60 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-600 focus:border-cyan-500 outline-none transition-colors"
+        className={inputClass}
       />
       <button
         type="submit"
@@ -196,8 +234,8 @@ export default function RessourcesPage() {
                       Recevoir la ressource gratuitement
                     </h3>
                     <p className="text-xs text-slate-500 mb-5 leading-relaxed">
-                      Entrez votre email professionnel. Vous recevrez un lien de téléchargement
-                      immédiatement.
+                      Renseignez vos coordonnées. Vous recevrez le lien de téléchargement
+                      immédiatement par email.
                     </p>
                     <ResourceForm resource={r} />
                   </div>
