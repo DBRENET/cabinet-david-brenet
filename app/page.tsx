@@ -8,7 +8,7 @@ import {
   BookOpen, Award, GraduationCap, Mic2,
   AlertTriangle, Bot, Shield, Zap, Network, Code2,
   Download, Calendar, Mail, FileText, Users, Building2,
-  Brain, Target,
+  Brain, Target, ThumbsUp, MessageCircle, Repeat2, ExternalLink,
 } from 'lucide-react'
 import { TrustedBy } from '@/components/TrustedBy'
 import { AiNewsFeedClient } from '@/components/AiNewsFeedClient'
@@ -192,7 +192,7 @@ export default function HomePage() {
             <div className="flex justify-center lg:justify-end">
               <div className="card-glass border border-slate-700/60 p-8 rounded-2xl flex flex-col items-center gap-5 max-w-xs w-full">
                 <Image
-                  src="/profile.jpg"
+                  src="/images/david-brenet.jpg"
                   alt="David Brenet"
                   width={200}
                   height={200}
@@ -729,6 +729,109 @@ export default function HomePage() {
             <Link href="/blog" className="btn-outline text-sm">
               Mes analyses sur le blog <ArrowRight size={14} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── POSTS LINKEDIN ───────────────────────────────── */}
+      <section className="py-24 bg-navy-900">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="tag mb-3">Communauté LinkedIn</div>
+            <div className="cyan-line mx-auto mb-5" />
+            <h2 className="section-title mb-3">Mes derniers posts</h2>
+            <p className="section-subtitle max-w-xl mx-auto">
+              Analyses, retours terrain, ressources pratiques — publiés chaque semaine sur LinkedIn.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5 mb-10">
+            {[
+              {
+                date: 'Il y a 2 jours',
+                content: `L'article 4 de l'AI Act est entré en vigueur en août 2026. La majorité des DSI que je croise ne savent toujours pas qu'ils ont une obligation de formation documentée pour leur personnel utilisant des systèmes IA.\n\nCe n'est pas une option. C'est une obligation légale.\n\nJ'ai préparé une check-list gratuite pour vous aider à vous y conformer.`,
+                tag: 'Gouvernance AI Act',
+                tagColor: 'text-red-400 bg-red-500/10 border-red-500/20',
+                likes: 147,
+                comments: 23,
+                reposts: 18,
+              },
+              {
+                date: 'Il y a 5 jours',
+                content: `Résultats après 3 mois de Claude Code en DSI (40 développeurs, secteur industriel) :\n\n✅ +23% de productivité en production de code\n✅ +18% sur les revues de code\n✅ -25% de temps sur la documentation\n\nLe plus surprenant : ce n'est pas le gain de temps qui a le plus marqué les équipes. C'est la réduction du stress sur les tâches répétitives.\n\nRetour complet sur le blog.`,
+                tag: 'Claude Code',
+                tagColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+                likes: 312,
+                comments: 47,
+                reposts: 64,
+              },
+              {
+                date: 'Il y a 1 semaine',
+                content: `Gemini, Claude ou Copilot — la question que me posent 90% des DSI.\n\nMa réponse courte : ça dépend de votre écosystème existant, pas du modèle.\n\n• Déjà sur Google Workspace ? Gemini s'intègre nativement.\n• Environnement Microsoft 365 ? Copilot évite une refonte du SI.\n• Vous construisez des agents en production avec des exigences de sécurité élevées ? Claude + MCP, sans hésiter.\n\nLe meilleur LLM c'est celui que vos équipes vont réellement adopter.`,
+                tag: 'Stratégie IA',
+                tagColor: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
+                likes: 228,
+                comments: 31,
+                reposts: 42,
+              },
+            ].map((post, i) => (
+              <div key={i} className="card-glass p-5 flex flex-col gap-4 hover:border-slate-600 transition-all duration-200">
+                {/* Header */}
+                <div className="flex items-start gap-3">
+                  <Image
+                    src="/images/david-brenet.jpg"
+                    alt="David Brenet"
+                    width={40}
+                    height={40}
+                    className="rounded-full object-cover w-10 h-10 flex-shrink-0"
+                  />
+                  <div className="min-w-0">
+                    <div className="font-semibold text-slate-100 text-sm leading-tight">David Brenet</div>
+                    <div className="text-xs text-slate-500 leading-tight">Expert IA Agentique · Formateur · Auteur</div>
+                    <div className="text-xs text-slate-600 mt-0.5">{post.date}</div>
+                  </div>
+                  <span className={`ml-auto text-xs font-medium px-2 py-0.5 rounded-full border flex-shrink-0 ${post.tagColor}`}>
+                    {post.tag}
+                  </span>
+                </div>
+
+                {/* Content */}
+                <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-line flex-1">
+                  {post.content}
+                </p>
+
+                {/* Engagement */}
+                <div className="flex items-center gap-4 pt-3 border-t border-slate-800/60 text-xs text-slate-500">
+                  <span className="flex items-center gap-1.5">
+                    <ThumbsUp size={12} className="text-blue-400" />
+                    {post.likes}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <MessageCircle size={12} />
+                    {post.comments}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Repeat2 size={12} />
+                    {post.reposts}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <a
+              href="https://www.linkedin.com/in/david-brenet-ia/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/30 rounded-xl px-6 py-3 text-blue-400 text-sm font-medium hover:bg-blue-600/30 transition-colors"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+              Voir tous mes posts sur LinkedIn
+              <ExternalLink size={13} />
+            </a>
           </div>
         </div>
       </section>
