@@ -10,7 +10,7 @@ import { TrustedBy } from '@/components/TrustedBy'
 export const metadata: Metadata = {
   title: 'Formations Claude & IA Agentique — Catalogue Intra-Entreprise | David Brenet',
   description:
-    'Catalogue de 6 formations intra-entreprise sur Claude, l\'IA agentique et l\'AI Act. De la demi-journée COMEX au parcours 3 jours pour les équipes IT. Formation certifiante, présentiel Niort ou à distance. David Brenet, expert Claude Anthropic.',
+    'Catalogue de 7 formations intra-entreprise sur Claude, l\'IA agentique et l\'AI Act. De la demi-journée COMEX au parcours 3 jours pour les équipes IT. Formation certifiante, présentiel Niort ou à distance. David Brenet, expert Claude Anthropic.',
   keywords: [
     'formation Claude entreprise',
     'formation IA agentique',
@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     'formation Claude managers',
     'formation COMEX IA',
     'formation assurance IA',
+    'formation Orsys IA',
     'David Brenet formateur',
   ],
   alternates: { canonical: 'https://davidbrenet.com/formation' },
@@ -38,7 +39,7 @@ const formations = [
     soustitre: 'Prendre en main Claude dans son quotidien professionnel',
     duree: '1 jour (7h)',
     durIcon: Clock,
-    public: 'Managers, chargés de clientèle, gestionnaires sinistres, souscripteurs, RH, juristes',
+    public: 'Managers, chargés de clientèle, responsables métier, chefs de projet, managers opérationnels, RH, juristes',
     niveau: 'Débutant — aucun prérequis technique',
     modalite: 'Présentiel intra-entreprise (Niort ou déplacement) / Distanciel',
     effectif: '8 à 12 participants',
@@ -61,7 +62,7 @@ const formations = [
           'Démonstration en live : ce que Claude fait vraiment bien',
           'La mécanique du prompting : contexte, rôle, format, contraintes',
           'Ateliers guidés : rédiger, résumer, structurer, reformuler',
-          'Cas d\'usage assurance : réponses clients, notes de couverture, comptes-rendus',
+          'Cas d\'usage métier : réponses clients, notes de synthèse, comptes-rendus',
         ],
       },
       {
@@ -77,7 +78,7 @@ const formations = [
     ],
     livrables: [
       'Guide de prompting métier (PDF illustré)',
-      'Bibliothèque de 30 prompts assurance prêts à l\'emploi',
+      'Bibliothèque de 50 prompts métier prêts à l\'emploi',
       'Checklist RGPD & sécurité pour usage Claude en entreprise',
       'Attestation de formation',
     ],
@@ -177,7 +178,7 @@ const formations = [
           'Premiers agents avec le SDK Python Anthropic',
           'Tool use : définir et appeler des outils depuis un agent',
           'Patterns : ReAct, Plan & Execute, Multi-step reasoning',
-          'Atelier : construire un agent de traitement de documents assurantiels',
+          'Atelier : construire un agent de traitement de documents métier',
         ],
       },
       {
@@ -188,7 +189,7 @@ const formations = [
           'Connecter Claude à vos outils : GED, CRM, base sinistres',
           'Patterns multi-agents : orchestrateur + sous-agents spécialisés',
           'Gestion des contextes longs et mémoire persistante',
-          'Atelier : architecture multi-agents pour un workflow sinistres',
+          'Atelier : architecture multi-agents pour un workflow métier',
         ],
       },
       {
@@ -243,7 +244,7 @@ const formations = [
         bloc: 'Programme (3h30 en continu)',
         items: [
           'L\'IA agentique en 10 minutes : ce qui change vraiment',
-          'Panorama des cas d\'usage en assurance et mutuelles (2026)',
+          'Panorama des cas d\'usage sectoriels (2026)',
           'Ce que font déjà vos concurrents — et ce que vous pouvez faire',
           'Les 3 erreurs que font 80% des organisations au départ',
           'Gouvernance, AI Act, responsabilité : ce que doit décider le COMEX',
@@ -292,7 +293,7 @@ const formations = [
           'AI Act : calendrier d\'application, champ d\'application, définitions',
           'Article 4 : obligation de « culture IA » — ce que cela implique concrètement',
           'Classification des systèmes IA : interdit / haut risque / limité / minimal',
-          'Les systèmes à haut risque dans l\'assurance (scoring, sinistres, souscription)',
+          'Les systèmes à haut risque par secteur (scoring, décisions automatisées)',
           'RGPD + AI Act : articulation, obligations cumulatives',
         ],
       },
@@ -347,7 +348,7 @@ const formations = [
         bloc: 'Matin — Exploration et priorisation (3h30)',
         items: [
           'Rappel de l\'écosystème Claude et des capacités agentiques (30 min)',
-          'Inspiration : 15 cas d\'usage agentiques en assurance démontés',
+          'Inspiration : 15 cas d\'usage agentiques multi-secteurs démontés',
           'Design sprint : identification des cas d\'usage de votre organisation',
           'Grille de priorisation : valeur métier × faisabilité × risque × délai',
           'Vote et sélection du cas d\'usage à prototyper',
@@ -375,6 +376,64 @@ const formations = [
     accessibilite: 'Format adaptable aux contraintes d\'accessibilité — me contacter.',
     ctaHref: '/contact?sujet=atelier-prototypage',
   },
+  {
+    id: 'f7',
+    code: 'F-07',
+    badge: 'Prompting',
+    badgeColor: 'bg-violet-500/20 text-violet-300 border-violet-500/30',
+    titre: 'Prompt Engineering & Bibliothèque de prompts',
+    soustitre: 'Maîtriser le prompting et capitaliser les prompts de votre organisation',
+    duree: '1 jour (7h)',
+    durIcon: Clock,
+    public: 'Tous collaborateurs utilisant des outils IA — managers, équipes métier, équipes IT',
+    niveau: 'Tous niveaux — une session par public si nécessaire',
+    modalite: 'Présentiel intra-entreprise / Distanciel',
+    effectif: '8 à 12 participants',
+    icon: FileText,
+    color: 'text-violet-400',
+    bg: 'bg-violet-500/10',
+    border: 'border-violet-500/30',
+    objectifs: [
+      'Comprendre la mécanique du prompting et les modèles mentaux efficaces',
+      'Rédiger des prompts précis, reproductibles et adaptés à son métier',
+      'Maîtriser les techniques avancées : chain-of-thought, few-shot, role prompting',
+      'Co-construire une bibliothèque de prompts documentée pour son équipe',
+      'Mettre en place une gouvernance de la bibliothèque de prompts',
+    ],
+    programme: [
+      {
+        bloc: 'Matin — Fondamentaux et techniques (3h30)',
+        items: [
+          'Mécanique du prompting : contexte, rôle, format, contraintes, exemples',
+          'Les 5 erreurs les plus fréquentes qui dégradent la qualité des réponses',
+          'Techniques avancées : chain-of-thought, few-shot learning, role prompting',
+          'Évaluation de la qualité d\'un prompt : checklist pratique',
+          'Ateliers : réécriture de prompts existants de l\'organisation',
+        ],
+      },
+      {
+        bloc: 'Après-midi — Bibliothèque de prompts (3h30)',
+        items: [
+          'Pourquoi capitaliser les prompts : valeur stratégique et gain de temps',
+          'Structure d\'une bibliothèque : catégories, métadonnées, versioning',
+          'Atelier collectif : identification et rédaction des 20 prompts clés de l\'équipe',
+          'Outils de stockage : Notion, Claude Projects, SharePoint, GitHub',
+          'Gouvernance : qui peut ajouter un prompt, comment le valider, comment le mettre à jour',
+          'Plan d\'action : responsable bibliothèque et jalons de déploiement',
+        ],
+      },
+    ],
+    livrables: [
+      'Template structuré de bibliothèque de prompts (Notion ou Word)',
+      'Les 20+ prompts co-construits pendant la session',
+      'Checklist qualité pour évaluer un prompt',
+      'Guide de gouvernance de la bibliothèque',
+      'Attestation de formation',
+    ],
+    evaluation: 'Exercice pratique de rédaction de prompts + peer review collectif',
+    accessibilite: 'Formation accessible aux personnes en situation de handicap — me contacter pour adapter le format.',
+    ctaHref: '/contact?sujet=formation-prompting',
+  },
 ]
 
 const schools = [
@@ -399,6 +458,13 @@ const schools = [
     levels: 'BTS → Master',
     modules: 'IA & assurance, Digitalisation, Conduite de projets',
   },
+  {
+    name: 'Orsys',
+    fullName: 'Orsys Formation',
+    since: 'Depuis 2024',
+    levels: 'Inter & intra-entreprise',
+    modules: 'IA Générative, Agents IA, Claude, Prompt Engineering — financement OPCO possible',
+  },
 ]
 
 /* ─── Page ─────────────────────────────────────────────── */
@@ -414,7 +480,7 @@ export default function FormationPage() {
           <div className="tag mb-3">Catalogue formations intra-entreprise</div>
           <div className="cyan-line mb-6" />
           <h1 className="text-5xl md:text-6xl font-bold text-slate-100 leading-tight mb-6">
-            6 formations Claude &amp; IA agentique<br />
+            7 formations Claude &amp; IA agentique<br />
             <span className="gradient-text">pour les entreprises de tous secteurs</span>
           </h1>
           <p className="text-xl text-slate-400 leading-relaxed max-w-2xl mb-8">
@@ -567,7 +633,7 @@ export default function FormationPage() {
                       </div>
                       <div>
                         <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Prochaine session inter</div>
-                        <div className="text-xs text-slate-400 italic">[À COMPLÉTER — formation disponible en intra dès maintenant]</div>
+                        <div className="text-xs text-slate-400 italic">Disponible en intra dès maintenant — me contacter pour les prochaines sessions inter</div>
                       </div>
                     </div>
                   </div>
@@ -605,7 +671,8 @@ export default function FormationPage() {
               <p className="text-slate-400 leading-relaxed mb-8">
                 J&apos;enseigne au <strong className="text-slate-200">CNAM</strong>,{' '}
                 <strong className="text-slate-200">CESI</strong> et{' '}
-                <strong className="text-slate-200">Ifpass</strong> depuis 2021.
+                <strong className="text-slate-200">Ifpass</strong> depuis 2021, et j&apos;interviens chez{' '}
+                <strong className="text-slate-200">Orsys</strong> comme formateur agréé sur l&apos;IA générative et les agents IA.
                 Modules IA, data, systèmes d&apos;information et accompagnement mémoires
                 pour des niveaux L3 à ingénieur.
               </p>
@@ -654,8 +721,8 @@ export default function FormationPage() {
                   {
                     icon: Brain,
                     color: 'text-purple-400',
-                    title: '23 ans côté client',
-                    body: 'Je connais vos contraintes SI, réglementaires et organisationnelles de l\'intérieur. Je ne vends pas de rêve.',
+                    title: '23 ans d\'expérience terrain',
+                    body: '23 ans en innovation IT, Data et IA dans des organisations de tous secteurs. Je connais vos contraintes SI, réglementaires et organisationnelles de l\'intérieur.',
                   },
                   {
                     icon: Bot,
@@ -667,7 +734,7 @@ export default function FormationPage() {
                     icon: Shield,
                     color: 'text-red-400',
                     title: 'Gouvernance & conformité incluses',
-                    body: 'Chaque formation intègre les dimensions AI Act, RGPD et politique d\'usage. Pas une option.',
+                    body: 'Chaque formation intègre les dimensions AI Act, RGPD et politique d\'usage, pas en option.',
                   },
                 ].map(({ icon: Icon, color, title, body }) => (
                   <div key={title} className="flex gap-4">

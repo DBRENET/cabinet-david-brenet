@@ -10,13 +10,14 @@ export const metadata: Metadata = {
   description:
     'Mes offres pour les entreprises de tous secteurs : keynote COMEX IA agentique, formation intra Claude & agents, diagnostic maturité agentique, déploiement d\'agents Claude. David Brenet, Niort.',
   keywords: [
-    'conseil IA agentique assurance',
+    'conseil IA agentique entreprise',
     'formation Claude entreprise',
-    'déploiement agents IA assurance',
+    'déploiement agents IA',
     'diagnostic maturité IA',
     'séminaire COMEX IA',
     'formation AI Act article 4',
     'consultant IA Niort',
+    'formateur Orsys IA',
   ],
   alternates: { canonical: 'https://davidbrenet.com/offres' },
 }
@@ -51,9 +52,9 @@ const offers = [
     border: 'border-cyan-500/30',
     badge: 'Formation intra ou inter',
     title: 'Claude & Agents IA',
-    tagline: 'Un catalogue de 6 formations certifiantes',
+    tagline: 'Un catalogue de 7 formations certifiantes',
     description:
-      'Des formations conçues pour les équipes des entreprises de tous secteurs, de la demi-journée pour les dirigeants aux 3 jours pour les équipes IT. Chaque formation est dispensée en présentiel, en distanciel ou en format mixte, avec un programme adapté à votre contexte sectoriel.',
+      'Des formations conçues pour les équipes des entreprises de tous secteurs, de la demi-journée pour les dirigeants aux 3 jours pour les équipes IT. Chaque formation est dispensée en présentiel, en distanciel ou en format mixte — y compris en inter-entreprises via Orsys.',
     services: [
       { title: 'Claude pour les managers et équipes métiers (1 jour)', desc: 'Usages avancés, projets, skills, sécurité des données — sans prérequis technique.' },
       { title: 'Claude Code pour les équipes IT (2 jours)', desc: 'Workflows, revue de code, tests, sécurité, gouvernance — pour les développeurs et architectes.' },
@@ -61,6 +62,7 @@ const offers = [
       { title: 'IA agentique pour COMEX / CODIR (½ journée)', desc: 'Comprendre l\'agentique, les enjeux et les décisions à prendre — pour les dirigeants.' },
       { title: 'AI Act & gouvernance de l\'IA agentique (1 jour)', desc: 'Article 4, obligations de formation, cartographie des risques, documentation.' },
       { title: 'Atelier cas d\'usage & prototypage (1 jour)', desc: 'Identifier, prioriser et prototyper un premier agent IA — équipe mixte métier + IT.' },
+      { title: 'Prompt Engineering & Bibliothèque de prompts (1 jour)', desc: 'Techniques avancées de prompting et co-construction d\'une bibliothèque documentée pour l\'équipe.' },
     ],
     deliverables: ['Attestation de formation', 'Supports de cours HD', 'Kit de mise en pratique', 'Accès aux ressources post-formation'],
     audience: 'DSI, Managers, Équipes IT, Équipes métiers',
@@ -77,7 +79,7 @@ const offers = [
     title: 'Maturité & feuille de route agentique',
     tagline: 'Savoir où vous êtes, décider par où commencer',
     description:
-      'Un diagnostic structuré pour évaluer votre niveau de maturité IA agentique, identifier les cas d\'usage à fort potentiel et construire une feuille de route réaliste et priorisée. Je l\'ai conçu en tenant compte des contraintes réelles des DSI d\'assureurs : SI legacy, réglementation, compétences disponibles.',
+      'Un diagnostic structuré pour évaluer votre niveau de maturité IA agentique, identifier les cas d\'usage à fort potentiel et construire une feuille de route réaliste et priorisée. Mon approche tient compte des contraintes réelles des DSI : SI legacy, réglementation sectorielle, compétences disponibles.',
     services: [
       { title: 'Grille de maturité complétée', desc: '5 dimensions évaluées : données, infrastructure, compétences, gouvernance, expérience IA.' },
       { title: 'Cartographie des cas d\'usage', desc: 'Identification et scoring des cas d\'usage IA agentique pour votre organisation.' },
@@ -115,7 +117,8 @@ const offers = [
 const academicPartners = [
   { name: 'CNAM', detail: 'Enseignant depuis 2021 — Méthodologie SI, Data, Programmation, accompagnement mémoires & soutenances ingénieur EICNAM' },
   { name: 'CESI', detail: 'Enseignant depuis 2024 — Modules IA, systèmes d\'information, profils Masters & Ingénieurs DevSecOps' },
-  { name: 'Ifpass', detail: 'Formateur depuis 2022 — Masters assurance, IA, digitalisation, management du risque' },
+  { name: 'Ifpass', detail: 'Formateur depuis 2022 — IA, digitalisation, management du risque, niveaux BTS à Master' },
+  { name: 'Orsys', detail: 'Formateur agréé depuis 2024 — IA Générative, Agents IA, Claude, Prompt Engineering — sessions inter & intra, financement OPCO' },
 ]
 
 export default function OffresPage() {
@@ -132,8 +135,8 @@ export default function OffresPage() {
             <span className="gradient-text">de l&apos;idée à l&apos;agent en production</span>
           </h1>
           <p className="text-xl text-slate-400 leading-relaxed max-w-2xl">
-            Des engagements clairs, des livrables précis, un seul interlocuteur qui connaît
-            l&apos;assurance et les mutuelles de l&apos;intérieur.
+            Des engagements clairs, des livrables précis, un seul interlocuteur avec 23 ans
+            d&apos;expérience en innovation IT, Data et IA.
           </p>
           <div className="flex flex-wrap gap-3 mt-8">
             {[
@@ -238,11 +241,11 @@ export default function OffresPage() {
               </div>
               <p className="text-slate-400 leading-relaxed mb-6">
                 Enseignant au <span className="text-slate-200 font-medium">CNAM</span>,{' '}
-                <span className="text-slate-200 font-medium">CESI</span> et{' '}
-                <span className="text-slate-200 font-medium">Ifpass</span> : modules IA,
-                data, systèmes d&apos;information, programmation, et accompagnement mémoires/soutenances.
+                <span className="text-slate-200 font-medium">CESI</span>,{' '}
+                <span className="text-slate-200 font-medium">Ifpass</span> et formateur agréé{' '}
+                <span className="text-slate-200 font-medium">Orsys</span> : IA générative, agents IA, data, systèmes d&apos;information.
               </p>
-              <div className="grid sm:grid-cols-3 gap-4">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {academicPartners.map(({ name, detail }) => (
                   <div key={name} className="card-glass p-4 border-emerald-500/20">
                     <div className="font-bold text-emerald-400 text-sm mb-1">{name}</div>
