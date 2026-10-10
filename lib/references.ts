@@ -7,30 +7,12 @@ export interface Reference {
 }
 
 export const references: Reference[] = [
-  // ── Grands comptes ──────────────────────────────────────────────────────────
-  {
-    name: 'Saint-Gobain',
-    sector: 'Industrie mondiale',
-    logoFile: 'saint-gobain.svg',
-    url: 'https://www.saint-gobain.com',
-  },
-  {
-    name: 'LVMH',
-    sector: 'Luxe & Retail',
-    logoFile: 'lvmh.svg',
-    url: 'https://www.lvmh.fr',
-  },
+  // ── Assurance & Mutuelles ───────────────────────────────────────────────────
   {
     name: 'Groupama',
     sector: 'Assurance',
     logoFile: 'groupama.svg',
     url: 'https://www.groupama.fr',
-  },
-  {
-    name: 'Macif',
-    sector: 'Assurance mutualiste',
-    logoFile: 'macif.svg',
-    url: 'https://www.macif.fr',
   },
   {
     name: 'Mutavie',
@@ -44,6 +26,19 @@ export const references: Reference[] = [
     sector: 'Assistance mutualiste',
     logoFile: 'ima.svg',
     url: 'https://www.ima.fr',
+  },
+  // ── Grands comptes ──────────────────────────────────────────────────────────
+  {
+    name: 'Saint-Gobain',
+    sector: 'Industrie mondiale',
+    logoFile: 'saint-gobain.svg',
+    url: 'https://www.saint-gobain.com',
+  },
+  {
+    name: 'LVMH',
+    sector: 'Luxe & Retail',
+    logoFile: 'lvmh.svg',
+    url: 'https://www.lvmh.fr',
   },
   {
     name: 'Zodiac',
@@ -62,19 +57,16 @@ export const references: Reference[] = [
     url: 'https://www.extia.fr',
   },
   {
-    name: 'DMM',
-    sector: 'Industrie',
-    logoFile: 'dmm.svg',
-  },
-  {
-    name: 'Riccobono',
-    sector: 'Distribution',
-    logoFile: 'riccobono.svg',
-  },
-  {
     name: 'Yamed',
     sector: 'Santé',
     logoFile: 'yamed.svg',
+  },
+  // ── Institutions publiques ──────────────────────────────────────────────────
+  {
+    name: 'IHEMI',
+    shortName: 'IHEMI',
+    sector: 'Min. de l\'Intérieur',
+    logoFile: 'ihemi.svg',
   },
   // ── Établissements académiques ───────────────────────────────────────────────
   {
@@ -85,11 +77,16 @@ export const references: Reference[] = [
     url: 'https://www.cnam.fr',
   },
   {
-    name: 'EICNAM',
-    shortName: 'EICNAM',
+    name: 'CESI',
+    shortName: 'CESI',
     sector: 'École d\'Ingénieurs',
-    logoFile: 'eicnam.svg',
-    url: 'https://www.cnam.fr',
+    logoFile: 'cesi.svg',
+  },
+  {
+    name: 'Ifpass',
+    shortName: 'Ifpass',
+    sector: 'Formation assurance',
+    logoFile: 'ifpass.svg',
   },
   {
     name: 'Grenoble École Management',
@@ -97,23 +94,5 @@ export const references: Reference[] = [
     sector: 'Grande école',
     logoFile: 'gem.svg',
     url: 'https://www.grenoble-em.com',
-  },
-  {
-    name: 'Institut des Hautes Études du Ministère de l\'Intérieur',
-    shortName: 'IHEMI',
-    sector: 'Secteur public',
-    logoFile: 'ihemi.svg',
-  },
-  {
-    name: 'Université de Tours',
-    shortName: 'Univ. Tours',
-    sector: 'Enseignement supérieur',
-    logoFile: 'univ-tours.svg',
-  },
-  {
-    name: 'Université de La Rochelle',
-    shortName: 'Univ. La Rochelle',
-    sector: 'Enseignement supérieur',
-    logoFile: 'univ-larochelle.svg',
   },
 ]

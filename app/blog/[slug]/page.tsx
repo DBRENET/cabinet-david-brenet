@@ -17,6 +17,273 @@ const blogData: Record<string, {
   linkedinUrl?: string
   content: string
 }> = {
+  'claude-code-dsi-assureur': {
+    title: 'Claude Code en DSI d\'assureur : retour d\'expérience après 3 mois',
+    subtitle: 'Comment Claude Code transforme le quotidien des équipes IT dans une DSI d\'assureur : revue de code automatisée, génération de tests, documentation de legacy. Ce que ça change vraiment.',
+    date: '2026-09-15',
+    readTime: '10 min',
+    category: 'Claude',
+    categoryColor: 'text-cyan-400',
+    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ia/',
+    content: `
+## Pourquoi j'ai voulu tester Claude Code en conditions réelles
+
+Depuis que Claude Code est disponible, je l'utilise quotidiennement dans mes propres projets. Mais ce qui m'intéressait vraiment, c'est de savoir comment il se comporte dans une vraie DSI d'assureur — avec des contraintes IT réelles : codebase legacy, règles de sécurité strictes, équipes de 20+ développeurs, et procédures de validation du code avant tout déploiement.
+
+J'ai eu l'occasion de déployer Claude Code pendant 3 mois dans une DSI que j'accompagne. Voici ce que j'ai observé.
+
+## Contexte : une DSI d'assureur en 2026
+
+L'équipe : 22 développeurs répartis entre une équipe backend Java (SI de gestion sinistres), une équipe frontend React, et une équipe data (Python/Spark). Environnement hybride on-premise / cloud.
+
+Contraintes principales :
+- Aucune donnée métier ne peut quitter l'environnement interne
+- Utilisation de Claude API via le compte Enterprise Anthropic (données non utilisées pour l'entraînement)
+- CLAUDE.md configuré avec les règles maison : conventions de code, bibliothèques autorisées, interdictions explicites (pas d'accès réseau depuis les agents, pas de modifications de fichiers de configuration en dehors d'un répertoire dédié)
+
+## Ce qui a vraiment changé : 3 usages à fort impact
+
+### 1. La revue de code automatisée
+
+Avant : les revues de code prenaient en moyenne 45 minutes par PR pour les développeurs seniors. Avec Claude Code, ils lancent un '/review' sur la PR avant de la soumettre. Claude identifie les problèmes potentiels de sécurité, les violations des conventions maison (via le CLAUDE.md), les cas limites non gérés.
+
+Résultat mesuré sur 3 mois : le nombre de commentaires de revue de code par PR a baissé de 62%. Les PR passent plus vite en revue humaine parce qu'elles arrivent déjà "pré-revues". Le temps de revue humaine est passé de 45 à 18 minutes en moyenne.
+
+### 2. La documentation du legacy Java
+
+Problème historique dans cette DSI : des modules Java écrits entre 2008 et 2015, documentés a minima, avec un turnover important. Des développeurs passaient parfois 2 jours à comprendre un module avant de pouvoir le modifier.
+
+Avec Claude Code, ils demandent une explication complète du module avant d'intervenir. Claude lit le code, identifie les patterns architecturaux, documente les flux de données, signale les zones à risque.
+
+Ce qui m'a surpris : Claude est particulièrement bon sur du legacy — il reconnaît des patterns anciens, comprend les dialectes Java de l'époque, et explique le "pourquoi" probable derrière des choix techniques qui semblent obscurs aujourd'hui.
+
+### 3. La génération de tests unitaires
+
+L'équipe avait une couverture de tests autour de 42% sur le backend — en dessous des standards. Générer des tests unitaires est une tâche fastidieuse que les développeurs font à reculons.
+
+Avec Claude Code : '/test' sur un fichier génère les tests unitaires correspondants en quelques secondes. L'équipe a fait passer sa couverture de 42% à 71% en 6 semaines, sans augmenter la charge de travail perçue.
+
+## Ce qui ne marche pas (ou moins bien)
+
+**Les architectures très spécifiques.** Sur les modules les plus anciens avec des patterns maison non documentés, Claude fait parfois des hypothèses incorrectes. Il faut toujours valider humainement les suggestions sur le legacy critique.
+
+**La génération de code from scratch.** Claude Code est excellent pour améliorer, documenter, tester du code existant. Il l'est moins pour concevoir from scratch une architecture complexe — ce n'est pas son rôle principal d'ailleurs.
+
+**La gestion des secrets.** Bien que Claude Code soit configuré pour ne pas traiter les fichiers contenant des credentials, il faut être vigilant. Le CLAUDE.md doit explicitement lister les répertoires et fichiers interdits.
+
+## La question de la gouvernance : ce que nous avons mis en place
+
+Politique d'usage Claude Code adoptée par la DSI avant tout déploiement :
+- Compte Enterprise Anthropic — traçabilité des usages
+- CLAUDE.md versionné dans le repo principal — les règles s'appliquent à toute l'équipe
+- Aucun fichier de configuration de production accessible depuis Claude Code
+- Les suggestions de Claude sont toujours revues avant merge — jamais de "merge automatique"
+- Formation de 2h pour chaque développeur avant premier usage
+
+## Conclusion : ce que je recommande
+
+Claude Code crée de la valeur réelle et mesurable dans une DSI d'assureur — à condition de l'encadrer correctement. Ce n'est pas un outil qu'on déploie en 5 minutes. C'est un assistant technique qui doit être configuré, gouverné et intégré dans les workflows existants.
+
+Les deux prérequis non négociables : un compte Enterprise (pour la confidentialité des données) et un CLAUDE.md bien rédigé (pour que Claude respecte les règles de votre organisation).
+
+Pour les DSI qui me lisent : commencez par un pilote sur une équipe volontaire de 3 à 5 développeurs, sur des projets non critiques. Mesurez. Puis étendez.
+    `,
+  },
+
+  'mcp-connecter-agents-si-assurance': {
+    title: 'MCP : comment connecter vos agents Claude à votre SI assurantiel',
+    subtitle: 'Le Model Context Protocol permet à Claude d\'accéder à vos API, GED et bases de données internes. Architecture, sécurité, cas d\'usage — le guide pratique pour les architectes SI.',
+    date: '2026-08-28',
+    readTime: '14 min',
+    category: 'IA Agentique',
+    categoryColor: 'text-purple-400',
+    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ia/',
+    content: `
+## Le problème que MCP résout
+
+Vous avez déployé Claude dans votre organisation. Vos équipes l'utilisent pour rédiger, résumer, analyser. Mais Claude ne sait rien de votre SI. Il ne peut pas consulter votre GED de sinistres, interroger votre base contrats, ni appeler l'API de votre outil de gestion. Il travaille en aveugle.
+
+C'est exactement le problème que résout le Model Context Protocol (MCP).
+
+## Qu'est-ce que MCP ?
+
+MCP (Model Context Protocol) est un protocole ouvert créé par Anthropic qui définit comment un modèle de langage peut interagir avec des outils et des sources de données externes de manière standardisée et sécurisée.
+
+Concrètement : MCP permet à Claude de "brancher" des outils sur votre SI — comme on branche des plugins sur un navigateur web. Chaque outil est exposé via un serveur MCP, que Claude peut appeler de manière contrôlée.
+
+## L'architecture MCP : 3 composants
+
+**1. Le client MCP** — C'est Claude (ou votre application Claude). Il envoie des requêtes aux serveurs MCP et traite les réponses.
+
+**2. Le serveur MCP** — C'est le code que vous écrivez pour exposer vos outils. Un serveur MCP peut exposer des ressources (données accessibles en lecture), des outils (actions pouvant être exécutées) et des prompts (templates de messages prédéfinis).
+
+**3. Le transport** — La couche de communication entre client et serveur (stdio pour du local, HTTP/SSE pour du distant).
+
+## Cas d'usage concrets en assurance
+
+### Cas 1 — Agent de consultation de contrats
+
+Un agent Claude avec accès à l'API GED de votre système de gestion contrats. Un conseiller peut demander : "Récupère le contrat de M. Dupont et résume les garanties incendie applicables."
+
+Serveur MCP à créer : un outil 'get_contract(contract_id)' qui appelle votre API interne et retourne les données du contrat formatées.
+
+Complexité : faible. Deux semaines de développement pour un développeur Python senior.
+
+### Cas 2 — Agent d'instruction de sinistres simples
+
+Un agent qui instruite automatiquement les sinistres "simples" (dégâts des eaux < 5 000€, sans litige apparent). Il consulte le contrat, vérifie les garanties, calcule l'indemnisation préliminaire, génère le projet de lettre de décision.
+
+Serveurs MCP nécessaires :
+- 'get_contract(id)' — lecture contrat
+- 'get_sinistre(id)' — lecture dossier sinistre
+- 'calculate_indemnisation(params)' — moteur de calcul
+- 'create_draft_letter(sinistre_id, content)' — création draft (écriture)
+
+Complexité : moyenne. 4 à 6 semaines de développement. Supervision humaine obligatoire sur la décision finale.
+
+### Cas 3 — Agent de veille réglementaire
+
+Un agent qui surveille les évolutions réglementaires (ACPR, EIOPA, CNIL) et alerte les équipes compliance sur les dispositions applicables à votre organisation.
+
+Serveurs MCP :
+- 'search_acpr_circulars(query, date_from)' — scraping/API ACPR
+- 'get_company_profile()' — profil réglementaire de l'entreprise
+- 'create_alert(team, content, urgency)' — création d'alerte interne
+
+## Sécurité : les 5 principes que j'applique
+
+**1. Principe du moindre privilège.** Chaque serveur MCP n'expose que les données et les actions strictement nécessaires pour son cas d'usage. Un agent de lecture de contrats n'a pas besoin d'un outil de modification.
+
+**2. Authentification à deux niveaux.** L'accès au serveur MCP est protégé (API key, JWT). Les accès aux données sous-jacentes utilisent les droits de l'utilisateur — pas un super-compte.
+
+**3. Journalisation exhaustive.** Chaque appel MCP est loggé : qui, quoi, quand, résultat. Indispensable pour la conformité et le debugging.
+
+**4. Validation des paramètres.** Le serveur MCP valide strictement les paramètres reçus de Claude. Une injection de paramètre malformé ne doit pas pouvoir atteindre votre SI.
+
+**5. Rate limiting.** Limitez le nombre d'appels par session et par utilisateur. Un agent qui "s'emballe" peut générer une charge inattended sur vos API internes.
+
+## Guide de démarrage : votre premier serveur MCP
+
+Le SDK officiel Anthropic propose des packages Python et TypeScript pour créer des serveurs MCP. Voici la structure minimale en Python :
+
+L'implémentation d'un outil simple prend 10 à 30 lignes de code. La vraie complexité est dans la gestion des erreurs, la sécurité et l'intégration avec vos API existantes.
+
+## Ce que MCP change pour l'architecture des agents
+
+Avant MCP, chaque déploiement d'agent IA était un développement sur mesure : l'intégration SI était codée directement dans l'agent, les outils n'étaient pas réutilisables, et chaque nouvel agent nécessitait de recoder les mêmes intégrations.
+
+Avec MCP, vous construisez une bibliothèque de serveurs MCP réutilisables. Votre GED exposée en MCP peut être utilisée par 5 agents différents. Vos APIs core business deviennent des ressources partagées.
+
+C'est le passage d'un modèle "projet IA" à un modèle "plateforme IA" — et c'est là que se trouve le vrai retour sur investissement.
+
+## Conclusion
+
+MCP est la pièce manquante pour passer des agents IA en sandbox aux agents IA en production dans un SI réel. Il impose une discipline d'architecture — ce qui est une bonne chose — et crée les conditions d'une industrialisation à l'échelle.
+
+Pour les architectes SI que je conseille : commencez par un inventaire des API internes que vous souhaitez exposer à Claude. Priorisez par valeur métier et par maturité de l'API. Et surtout : impliquez votre RSSI dès le début.
+    `,
+  },
+
+  'agents-ia-gestion-sinistres': {
+    title: 'Agents IA en gestion de sinistres : architecture et premiers résultats',
+    subtitle: 'Anatomie d\'un agent Claude pour l\'instruction automatique des sinistres courants : orchestration, outils, supervision humaine et conformité RGPD. Retour sur un prototype en production.',
+    date: '2026-08-10',
+    readTime: '16 min',
+    category: 'Assurance',
+    categoryColor: 'text-emerald-400',
+    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ia/',
+    content: `
+## La gestion de sinistres : un terrain idéal pour les agents IA
+
+La gestion de sinistres concentre trois caractéristiques qui en font un terrain privilégié pour les agents IA :
+
+**Volume répétable** : une part significative des sinistres (entre 30% et 60% selon les branches) sont "simples" — même processus, critères connus, décision prévisible.
+
+**Données structurées disponibles** : le contrat, l'historique client, le barème de garanties, les plafonds — tout existe dans le SI.
+
+**Fort enjeu de délai** : le client en attente d'une décision sinistre est un client sensible. Réduire le délai d'instruction de 72h à quelques heures crée une valeur réelle et mesurable.
+
+## Le prototype que nous avons déployé
+
+Contexte : un assureur IARD, branche dégâts des eaux. Volume : environ 180 sinistres dégâts des eaux par mois. Critères de "sinistres simples" définis avec les experts métier : dommage inférieur à 8 000€, pas de mise en cause d'un tiers, déclaration < 5 jours après le sinistre, pas de sinistre antérieur sur le même bien dans les 18 mois.
+
+Environ 55% du volume correspondait à ces critères — soit ~100 sinistres/mois automatisables.
+
+## Architecture de l'agent
+
+L'agent est construit avec le SDK Python Anthropic. Il suit un pattern ReAct (Reasoning + Acting) avec 5 outils MCP :
+
+**Outil 1 — get_contract(policy_id)**
+Récupère les données du contrat : garanties souscrites, plafonds, franchises, exclusions. Connecté à l'API de gestion des contrats.
+
+**Outil 2 — get_sinistre(claim_id)**
+Récupère les données du dossier sinistre : date, nature, description, pièces jointes disponibles. Connecté au SI sinistres.
+
+**Outil 3 — get_client_history(client_id)**
+Vérifie l'historique sinistres du client sur les 36 derniers mois. Anti-fraude de premier niveau.
+
+**Outil 4 — calculate_indemnisation(params)**
+Moteur de calcul réglementaire : applique les franchises, les plafonds, les règles de proportionnalité. C'est une règle métier pure — pas de l'IA.
+
+**Outil 5 — submit_for_review(claim_id, recommendation, reasoning)**
+Soumet la recommandation de l'agent à la file de validation humaine. L'agent ne décide jamais seul.
+
+## Le prompt système : la clé de tout
+
+Le comportement de l'agent est entièrement défini par son prompt système. Les 3 éléments critiques que nous avons appris à l'usage :
+
+**La définition explicite du périmètre** : "Tu instruits des sinistres dégâts des eaux simples. Si le dossier présente l'un des critères suivants, tu dois immédiatement escalader à un gestionnaire humain sans formuler de recommandation : [liste des critères d'escalade]."
+
+**L'obligation de transparence** : "Ta recommandation doit toujours inclure le raisonnement complet, la référence exacte aux garanties du contrat, et le calcul détaillé de l'indemnisation. Aucune recommandation sans justification."
+
+**La gestion de l'incertitude** : "Si tu n'as pas toutes les informations nécessaires, tu dois demander les informations manquantes ou escalader. Tu ne dois jamais formuler une recommandation sur la base d'hypothèses."
+
+## Résultats après 4 mois en production
+
+Sur 382 sinistres "simples" traités par l'agent :
+
+**Taux d'accord gestionnaire** : 91% des recommandations de l'agent ont été validées sans modification par le gestionnaire. 6% ont nécessité un ajustement mineur. 3% ont été refusées (souvent parce que le gestionnaire avait une information contextuelle que l'agent n'avait pas).
+
+**Délai d'instruction** : passé de 3,2 jours en moyenne à 4,7 heures pour les dossiers traités par l'agent.
+
+**Qualité du dossier** : les gestionnaires ont unanimement noté que les dossiers instruits par l'agent arrivent mieux documentés que les dossiers instruits manuellement — le raisonnement de l'agent est explicite et traçable.
+
+**Escalades** : 23% des dossiers initialement identifiés comme "simples" ont été escaladés par l'agent après consultation du dossier complet. Ce taux élevé d'escalade est volontaire — nous préférons qu'il escalade trop que pas assez.
+
+## Ce que la conformité RGPD impose
+
+Travailler sur des dossiers sinistres, c'est travailler avec des données personnelles sensibles. Les points de conformité non négociables :
+
+**Traçabilité** : chaque interaction de l'agent avec le SI est loggée avec horodatage, identifiant dossier, action effectuée et résultat. Ces logs sont conservés 5 ans.
+
+**Droit d'information** : les assurés dont le sinistre est traité par un système IA automatisé en sont informés dans l'accusé de réception.
+
+**Droit à l'examen humain** : conformément à l'article 22 du RGPD, l'assuré peut demander un examen humain de sa décision. Le processus de demande est clairement documenté.
+
+**Localisation des données** : l'agent utilise l'API Claude Enterprise. Les données ne quittent jamais l'environnement contractuel défini avec Anthropic.
+
+## Ce que j'ai appris
+
+**La qualité du prompt système est plus importante que l'architecture technique.** Nous avons passé 3 semaines à affiner le prompt système avec les experts métier — c'est là que s'est jouée la qualité du résultat.
+
+**La supervision humaine n'est pas un obstacle, c'est une feature.** Le gestionnaire qui valide les recommandations de l'agent gagne du temps ET monte en compétence — il apprend à identifier rapidement ce qui est juste ou faux dans le raisonnement de l'agent.
+
+**L'escalade doit être facile et valorisée.** Au début, les gestionnaires avaient tendance à valider des recommandations douteuses pour "ne pas bloquer le système". Il a fallu travailler sur la culture : escalader est normal, attendu, et valorisé.
+
+## Prochaines étapes
+
+En phase 2, nous allons étendre l'agent à la branche bris de glace (volume encore plus élevé, processus plus simple) et expérimenter avec un agent de détection précoce des dossiers à risque de contentieux.
+
+La phase 3 (horizon 18 mois) : agent de gestion des recours entre assureurs — un processus aujourd'hui très manuel, lourd en échanges de courriers, et à fort potentiel d'automatisation.
+
+## Conclusion
+
+Les agents IA en gestion de sinistres ne sont plus de la science-fiction. Ils sont en production dans des organisations que j'accompagne, avec des résultats mesurables. Mais leur succès repose sur trois piliers que je répète à chaque client : une définition rigoureuse du périmètre, une supervision humaine bien pensée, et une gouvernance RGPD irréprochable.
+
+L'agent IA ne remplace pas le gestionnaire — il l'augmente. Et c'est exactement la promesse qu'il tient.
+    `,
+  },
+
   'ia-act-guide-conformite-entreprise': {
     title: 'IA Act : guide pratique de mise en conformité pour les entreprises françaises',
     subtitle: 'Le règlement européen sur l\'IA entre en vigueur par étapes. Ce guide vous aide à comprendre vos obligations et à structurer votre mise en conformité.',
@@ -24,7 +291,7 @@ const blogData: Record<string, {
     readTime: '12 min',
     category: 'Gouvernance IA',
     categoryColor: 'text-purple-400',
-    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ab26367b',
+    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ia/',
     content: `
 ## Ce que j'observe sur le terrain
 
@@ -91,7 +358,7 @@ L'IA Act n'est pas une contrainte supplémentaire mais une opportunité de struc
     readTime: '15 min',
     category: 'Agents IA',
     categoryColor: 'text-cyan-400',
-    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ab26367b',
+    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ia/',
     content: `
 ## Pourquoi les agents IA changent tout
 
@@ -159,7 +426,7 @@ Les agents IA métiers représentent la prochaine vague de valeur de l'IA en ent
     readTime: '10 min',
     category: 'Architecture IA',
     categoryColor: 'text-blue-400',
-    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ab26367b',
+    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ia/',
     content: `
 ## Le problème que tout le monde a
 
@@ -216,7 +483,7 @@ Le RAG est aujourd'hui la méthode la plus pragmatique pour déployer l'IA gén�
     readTime: '8 min',
     category: 'Stratégie IA',
     categoryColor: 'text-emerald-400',
-    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ab26367b',
+    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ia/',
     content: `
 ## La question que tout DSI me pose
 
@@ -293,7 +560,7 @@ Une roadmap IA efficace n'est pas un catalogue de technologies. C'est un outil d
     readTime: '11 min',
     category: 'Gouvernance IA',
     categoryColor: 'text-purple-400',
-    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ab26367b',
+    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ia/',
     content: `
 ## Pourquoi votre charte IA actuelle ne fonctionne pas
 
@@ -359,7 +626,7 @@ Une bonne charte IA n'est pas celle qui interdit le plus — c'est celle qui enc
     readTime: '9 min',
     category: 'Stratégie IA',
     categoryColor: 'text-emerald-400',
-    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ab26367b',
+    linkedinUrl: 'https://www.linkedin.com/in/david-brenet-ia/',
     content: `
 ## La question que tout DAF me pose
 
@@ -447,7 +714,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: post.title,
     description: post.subtitle,
-    alternates: { canonical: `https://davidbrenet.com/blog/${params.slug}` },
+    alternates: { canonical: 'https://davidbrenet.com/blog/${params.slug}' },
     openGraph: {
       title: post.title,
       description: post.subtitle,
@@ -539,7 +806,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       '@type': 'Person',
       name: 'David Brenet',
       url: 'https://davidbrenet.com',
-      sameAs: 'https://www.linkedin.com/in/david-brenet-ab26367b',
+      sameAs: 'https://www.linkedin.com/in/david-brenet-ia/',
     },
     publisher: {
       '@type': 'Organization',
@@ -565,7 +832,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <ArrowLeft size={15} /> Retour au blog
           </Link>
 
-          <div className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-slate-800 ${post.categoryColor} border border-current/20 mb-5`}>
+          <div className={'inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-slate-800 ${post.categoryColor} border border-current/20 mb-5'}>
             <Tag size={10} />
             {post.category}
           </div>
@@ -633,7 +900,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                   Auteur de deux ouvrages sur l&apos;IA aux Éditions ENI. Enseignant au CNAM, CESI et Ifpass.
                 </p>
                 <a
-                  href="https://www.linkedin.com/in/david-brenet-ab26367b"
+                  href="https://www.linkedin.com/in/david-brenet-ia/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm text-blue-400 hover:underline mt-3"

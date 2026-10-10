@@ -12,9 +12,38 @@ export const metadata: Metadata = {
 
 const books = [
   {
+    id: 'ia-expliquee-v2',
+    title: 'L\'Intelligence Artificielle expliquée — 2ème édition',
+    subtitle: 'Des concepts de base aux applications avancées de l\'IA',
+    publisher: 'Éditions ENI',
+    year: 'À paraître — 18 novembre 2026',
+    badge: 'À paraître',
+    badgeColor: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
+    color: 'border-amber-500/30',
+    accent: 'text-amber-400',
+    highlight: 'from-amber-500/8 to-cyan-500/5',
+    coverImage: '/books/ia-expliquee-v2.jpg',
+    coverAlt: 'Couverture L\'Intelligence Artificielle expliquée 2ème édition — David Brenet, ENI',
+    description: `La deuxième édition entièrement mise à jour de l'ouvrage de référence. Nouveaux chapitres sur l'IA agentique, Claude et l'écosystème Anthropic, le Model Context Protocol (MCP), les agents IA en production et le cadre réglementaire AI Act. Un ouvrage pédagogique et rigoureux pour comprendre l'IA générative dans sa globalité, des fondamentaux aux déploiements agentiques en entreprise.`,
+    audience: 'Professionnels IT, managers, ingénieurs, étudiants, et tout professionnel souhaitant une compréhension approfondie et à jour de l\'IA.',
+    chapters: [
+      'Fondamentaux de l\'Intelligence Artificielle (mis à jour)',
+      'Machine Learning & Deep Learning',
+      'IA Générative : LLM, architecture Transformer',
+      'Claude & l\'écosystème Anthropic',
+      'IA agentique & agents autonomes',
+      'Model Context Protocol (MCP)',
+      'Déploiement en production & MLOps',
+      'Gouvernance & AI Act',
+      'Cas d\'usage sectoriels (assurance, finance, santé)',
+    ],
+    link: 'https://www.editions-eni.fr',
+    preorder: true,
+  },
+  {
     id: 'ia-expliquee',
     title: 'L\'Intelligence Artificielle expliquée',
-    subtitle: 'Des concepts de base aux applications avancées de l\'IA',
+    subtitle: 'Des concepts de base aux applications avancées de l\'IA — 1ère édition',
     publisher: 'Éditions ENI',
     year: 'Février 2024',
     badge: 'Disponible',
@@ -24,10 +53,7 @@ const books = [
     highlight: 'from-cyan-500/10 to-blue-500/5',
     coverImage: '/books/ia-expliquee.jpg',
     coverAlt: 'Couverture L\'Intelligence Artificielle expliquée — David Brenet, ENI',
-    description: `Un ouvrage pédagogique et rigoureux pour comprendre l'Intelligence Artificielle dans sa globalité.
-    De l'histoire de l'IA aux architectures de deep learning, en passant par le machine learning,
-    le traitement du langage naturel et les systèmes multi-agents, ce livre couvre l'ensemble du spectre
-    des technologies IA actuelles avec des exemples concrets et des cas d'usage professionnels.`,
+    description: `Un ouvrage pédagogique et rigoureux pour comprendre l'Intelligence Artificielle dans sa globalité. De l'histoire de l'IA aux architectures de deep learning, en passant par le machine learning, le traitement du langage naturel et les systèmes multi-agents, ce livre couvre l'ensemble du spectre des technologies IA actuelles avec des exemples concrets et des cas d'usage professionnels.`,
     audience: 'Professionnels IT, managers, ingénieurs, étudiants cherchant une compréhension approfondie de l\'IA.',
     chapters: [
       'Fondamentaux de l\'Intelligence Artificielle',
@@ -41,10 +67,11 @@ const books = [
       'Éthique et gouvernance de l\'IA',
     ],
     link: 'https://www.editions-eni.fr/livre/l-intelligence-artificielle-expliquee-des-concepts-de-base-aux-applications-avancees-de-l-ia-9782409044526',
+    preorder: false,
   },
   {
-    id: 'ia-metiers-it',
-    title: 'L\'Intelligence Artificielle au service des métiers de l\'IT',
+    id: 'ia-pros-it',
+    title: 'L\'IA pour les professionnels de l\'IT',
     subtitle: 'Comprendre et maîtriser la révolution IA',
     publisher: 'Éditions ENI — Collection Expert',
     year: 'Mai 2025',
@@ -54,11 +81,8 @@ const books = [
     accent: 'text-purple-400',
     highlight: 'from-purple-500/10 to-blue-500/5',
     coverImage: '/books/ia-metiers-it.jpg',
-    coverAlt: 'Couverture L\'Intelligence Artificielle au service des métiers de l\'IT — David Brenet, ENI Expert',
-    description: `Un guide stratégique et opérationnel destiné aux professionnels IT : DSI, architectes,
-    chefs de projet, ingénieurs et managers. Cet ouvrage de la collection Expert aborde l'IA sous l'angle
-    de la transformation des métiers de l'IT : comment piloter un projet IA, architecturer un système IA
-    en production, gouverner les usages et industrialiser les déploiements.`,
+    coverAlt: 'Couverture L\'IA pour les professionnels de l\'IT — David Brenet, ENI Expert',
+    description: `Un guide stratégique et opérationnel destiné aux professionnels IT : DSI, architectes, chefs de projet, ingénieurs et managers. Cet ouvrage de la collection Expert aborde l'IA sous l'angle de la transformation des métiers de l'IT : comment piloter un projet IA, architecturer un système IA en production, gouverner les usages et industrialiser les déploiements.`,
     audience: 'DSI, architectes SI, chefs de projet IT, managers techniques, ingénieurs IA.',
     chapters: [
       'La révolution IA dans les métiers IT',
@@ -73,6 +97,7 @@ const books = [
       'Cas d\'usage sectoriels',
     ],
     link: 'https://www.editions-eni.fr/livre/l-intelligence-artificielle-au-service-des-metiers-de-l-it-comprendre-et-maitriser-la-revolution-ia-9782409047152',
+    preorder: false,
   },
 ]
 
@@ -158,15 +183,23 @@ export default function PublicationsPage() {
                       <div className="text-sm text-slate-300">{book.audience}</div>
                     </div>
 
-                    <a
-                      href={book.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary text-sm"
-                    >
-                      Commander chez l&apos;éditeur
-                      <ExternalLink size={14} />
-                    </a>
+                    {book.preorder ? (
+                      <div className="flex flex-wrap gap-3">
+                        <span className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-medium px-5 py-2.5 rounded-lg">
+                          📘 Disponible le 18 novembre 2026
+                        </span>
+                      </div>
+                    ) : (
+                      <a
+                        href={book.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary text-sm"
+                      >
+                        Commander chez l&apos;éditeur
+                        <ExternalLink size={14} />
+                      </a>
+                    )}
                   </div>
                 </div>
 

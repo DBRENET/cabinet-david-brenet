@@ -3,16 +3,16 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Download } from 'lucide-react'
 
 const navLinks = [
   { href: '/', label: 'Accueil' },
-  { href: '/vision', label: 'Notre Vision' },
-  { href: '/offres', label: 'Nos Offres' },
-  { href: '/formation', label: 'Formation' },
-  { href: '/publications', label: 'Publications' },
-  { href: '/references', label: 'Références' },
+  { href: '/claude-ia-agentique', label: 'IA Agentique & Claude' },
+  { href: '/offres', label: 'Offres' },
+  { href: '/formation', label: 'Formations' },
+  { href: '/ressources', label: 'Ressources' },
   { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 export function Navigation() {
@@ -45,18 +45,18 @@ export function Navigation() {
             <div>
               <div className="font-bold text-slate-100 text-sm leading-tight">David Brenet</div>
               <div className="text-xs text-slate-400 leading-tight tracking-wide">
-                Conseil&nbsp;•&nbsp;Formation&nbsp;•&nbsp;Solutions&nbsp;IA
+                IA&nbsp;Agentique&nbsp;•&nbsp;Claude&nbsp;•&nbsp;Assurance
               </div>
             </div>
           </Link>
 
           {/* ── Desktop nav ── */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 ${
+                className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-150 ${
                   pathname === link.href
                     ? 'text-cyan-400 bg-cyan-500/10'
                     : 'text-slate-300 hover:text-slate-100 hover:bg-slate-800/60'
@@ -69,8 +69,9 @@ export function Navigation() {
 
           {/* ── CTA ── */}
           <div className="hidden lg:block">
-            <Link href="/contact" className="btn-primary text-sm">
-              Prendre rendez-vous
+            <Link href="/ressources" className="btn-primary text-sm">
+              <Download size={15} />
+              Ressources gratuites
             </Link>
           </div>
 
@@ -103,11 +104,19 @@ export function Navigation() {
                 {link.label}
               </Link>
             ))}
-            <div className="pt-3 pb-1">
+            <div className="pt-3 pb-1 space-y-2">
+              <Link
+                href="/ressources"
+                onClick={() => setIsOpen(false)}
+                className="btn-primary w-full justify-center text-sm"
+              >
+                <Download size={15} />
+                Ressources gratuites
+              </Link>
               <Link
                 href="/contact"
                 onClick={() => setIsOpen(false)}
-                className="btn-primary w-full justify-center text-sm"
+                className="btn-outline w-full justify-center text-sm"
               >
                 Prendre rendez-vous
               </Link>

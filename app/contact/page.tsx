@@ -5,18 +5,41 @@ import Link from 'next/link'
 import { Mail, MapPin, Linkedin, Clock, CheckCircle2, Send, ArrowRight, Phone } from 'lucide-react'
 
 const subjects = [
-  { value: 'conseil', label: 'Conseil Stratégique IA' },
-  { value: 'agents', label: 'Déploiement Agents IA' },
-  { value: 'generative', label: 'IA Générative & Sécurisation' },
-  { value: 'formation', label: 'Formation & Conférences' },
-  { value: 'architecture', label: 'Architecture & Data' },
+  { value: 'formation-claude-managers', label: 'Formation Claude — Managers & équipes métiers (1j)' },
+  { value: 'formation-claude-code', label: 'Formation Claude Code — Équipes IT (2j)' },
+  { value: 'formation-agents-mcp', label: 'Formation Agents IA & MCP (3j)' },
+  { value: 'formation-comex', label: 'Keynote / Séminaire COMEX (½j)' },
+  { value: 'formation-ai-act', label: 'Formation AI Act & Gouvernance (1j)' },
+  { value: 'atelier-prototypage', label: 'Atelier cas d\'usage & prototypage (1j)' },
+  { value: 'diagnostic', label: 'Diagnostic maturité IA agentique' },
+  { value: 'deploiement', label: 'Déploiement agents Claude en production' },
   { value: 'conference', label: 'Invitation en conférence' },
   { value: 'other', label: 'Autre demande' },
 ]
 
+const orgTypes = [
+  { value: 'assureur', label: 'Assureur' },
+  { value: 'mutuelle', label: 'Mutuelle' },
+  { value: 'ip', label: 'Institution de prévoyance' },
+  { value: 'courtier', label: 'Courtier / Intermédiaire' },
+  { value: 'banque', label: 'Banque / Finance' },
+  { value: 'grande-entreprise', label: 'Grande entreprise (autre secteur)' },
+  { value: 'pme', label: 'PME / ETI' },
+  { value: 'collectivite', label: 'Collectivité / Secteur public' },
+  { value: 'ecole', label: 'École / Université' },
+  { value: 'other', label: 'Autre' },
+]
+
+const deadlines = [
+  { value: '1mois', label: 'Dans le mois' },
+  { value: '3mois', label: 'Dans les 3 mois' },
+  { value: '6mois', label: 'Dans les 6 mois' },
+  { value: 'exploration', label: 'En phase d\'exploration' },
+]
+
 export default function ContactPage() {
   const [form, setForm] = useState({
-    firstName: '', lastName: '', company: '', role: '', email: '', phone: '', subject: '', message: ''
+    firstName: '', lastName: '', company: '', orgType: '', orgSize: '', role: '', email: '', phone: '', subject: '', deadline: '', message: ''
   })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -39,7 +62,7 @@ export default function ContactPage() {
       if (!res.ok) throw new Error()
       setSubmitted(true)
     } catch {
-      setError("Une erreur est survenue. Veuillez réessayer ou contacter directement brenet.david@gmail.com")
+      setError("Une erreur est survenue. Veuillez réessayer ou contacter directement contact@davidbrenet.com")
     } finally {
       setLoading(false)
     }
@@ -99,8 +122,8 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <div className="text-xs text-slate-500 mb-0.5">Email</div>
-                      <a href="mailto:brenet.david@gmail.com" className="text-sm text-slate-300 hover:text-cyan-400 transition-colors">
-                        brenet.david@gmail.com
+                      <a href="mailto:contact@davidbrenet.com" className="text-sm text-slate-300 hover:text-cyan-400 transition-colors">
+                        contact@davidbrenet.com
                       </a>
                     </div>
                   </div>
@@ -120,7 +143,7 @@ export default function ContactPage() {
                     <div>
                       <div className="text-xs text-slate-500 mb-0.5">LinkedIn</div>
                       <a
-                        href="https://www.linkedin.com/in/david-brenet-ab26367b"
+                        href="https://www.linkedin.com/in/david-brenet-ia/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm text-slate-300 hover:text-cyan-400 transition-colors"
@@ -255,6 +278,41 @@ export default function ContactPage() {
                     </div>
                   </div>
 
+                  {/* Qualification */}
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-2">Type d&apos;organisation *</label>
+                      <select
+                        name="orgType"
+                        required
+                        value={form.orgType}
+                        onChange={handleChange}
+                        className="w-full bg-navy-800/80 border border-slate-700/60 rounded-xl px-4 py-3 text-sm text-slate-200 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 outline-none transition-colors"
+                      >
+                        <option value="">Sélectionnez</option>
+                        {orgTypes.map(({ value, label }) => (
+                          <option key={value} value={value}>{label}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-2">Taille de l&apos;organisation</label>
+                      <select
+                        name="orgSize"
+                        value={form.orgSize}
+                        onChange={handleChange}
+                        className="w-full bg-navy-800/80 border border-slate-700/60 rounded-xl px-4 py-3 text-sm text-slate-200 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 outline-none transition-colors"
+                      >
+                        <option value="">Sélectionnez</option>
+                        <option value="moins50">Moins de 50 salariés</option>
+                        <option value="50-250">50 à 250 salariés</option>
+                        <option value="250-1000">250 à 1 000 salariés</option>
+                        <option value="1000-5000">1 000 à 5 000 salariés</option>
+                        <option value="plus5000">Plus de 5 000 salariés</option>
+                      </select>
+                    </div>
+                  </div>
+
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-medium text-slate-300 mb-2">Email professionnel *</label>
@@ -282,20 +340,36 @@ export default function ContactPage() {
                   </div>
 
                   {/* Sujet */}
-                  <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">Sujet de la demande *</label>
-                    <select
-                      name="subject"
-                      required
-                      value={form.subject}
-                      onChange={handleChange}
-                      className="w-full bg-navy-800/80 border border-slate-700/60 rounded-xl px-4 py-3 text-sm text-slate-200 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 outline-none transition-colors"
-                    >
-                      <option value="">Sélectionnez un sujet</option>
-                      {subjects.map(({ value, label }) => (
-                        <option key={value} value={value}>{label}</option>
-                      ))}
-                    </select>
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-2">Sujet de la demande *</label>
+                      <select
+                        name="subject"
+                        required
+                        value={form.subject}
+                        onChange={handleChange}
+                        className="w-full bg-navy-800/80 border border-slate-700/60 rounded-xl px-4 py-3 text-sm text-slate-200 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 outline-none transition-colors"
+                      >
+                        <option value="">Sélectionnez un sujet</option>
+                        {subjects.map(({ value, label }) => (
+                          <option key={value} value={value}>{label}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-2">Échéance souhaitée</label>
+                      <select
+                        name="deadline"
+                        value={form.deadline}
+                        onChange={handleChange}
+                        className="w-full bg-navy-800/80 border border-slate-700/60 rounded-xl px-4 py-3 text-sm text-slate-200 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 outline-none transition-colors"
+                      >
+                        <option value="">Sélectionnez</option>
+                        {deadlines.map(({ value, label }) => (
+                          <option key={value} value={value}>{label}</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
 
                   {/* Message */}

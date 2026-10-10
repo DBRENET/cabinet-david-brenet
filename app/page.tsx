@@ -1,97 +1,132 @@
+'use client'
+
+import { useState } from 'react'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
-  ArrowRight, CheckCircle2, Brain, Shield, Bot, ChevronRight,
-  BookOpen, Users, Award, TrendingUp, GraduationCap, Mic2, Star,
-  Quote, Network, BarChart3,
+  ArrowRight, CheckCircle2, ChevronDown, ChevronUp,
+  BookOpen, Award, GraduationCap, Mic2,
+  AlertTriangle, Bot, Shield, Zap, Network, Code2,
+  Download, Calendar, Mail, FileText, Users, Building2,
 } from 'lucide-react'
 import { TrustedBy } from '@/components/TrustedBy'
 
-export const metadata: Metadata = {
-  title: 'David Brenet — Conseil IA, Formation IA & Agents IA | France',
-  description:
-    'J\'accompagne entreprises et grandes écoles : stratégie IA, formation, agents & automatisation. Conseil IA, gouvernance, conférences et déploiement d\'agents IA en France.',
-  keywords: [
-    'conseil IA France',
-    'formation IA entreprise',
-    'agents IA automatisation',
-    'gouvernance IA',
-    'stratégie IA COMEX',
-    'conférences IA',
-    'formation IA dirigeants',
-    'David Brenet',
-  ],
-  alternates: { canonical: 'https://davidbrenet.com' },
+/* ── Newsletter inline ───────────────────────────────────── */
+function NewsletterForm() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setStatus('loading')
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, resource: 'newsletter-accueil' }),
+      })
+      if (!res.ok) throw new Error()
+      setStatus('ok')
+    } catch {
+      setStatus('error')
+    }
+  }
+
+  if (status === 'ok') {
+    return (
+      <div className="flex items-center gap-3 text-emerald-400 text-sm">
+        <CheckCircle2 size={18} />
+        <span>Inscription confirmée — bienvenue dans la communauté !</span>
+      </div>
+    )
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+      <input
+        type="email"
+        required
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        placeholder="votre@email.fr"
+        className="flex-1 bg-navy-800/80 border border-slate-700/60 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-600 focus:border-cyan-500 outline-none transition-colors"
+      />
+      <button
+        type="submit"
+        disabled={status === 'loading'}
+        className="btn-primary text-sm whitespace-nowrap disabled:opacity-60"
+      >
+        {status === 'loading' ? 'Inscription...' : "S'abonner"}
+      </button>
+      {status === 'error' && (
+        <p className="text-red-400 text-xs mt-1">Erreur — essayez à nouveau ou écrivez-moi directement.</p>
+      )}
+    </form>
+  )
 }
 
-const stats = [
-  { value: '23+', label: 'ans d\'expertise IT', icon: Award },
-  { value: '2', label: 'ouvrages publiés', icon: BookOpen },
-  { value: '10+', label: 'références grands comptes', icon: Users },
-  { value: '4', label: 'institutions académiques', icon: GraduationCap },
-]
-
-const pillars = [
+/* ── FAQ ─────────────────────────────────────────────────── */
+const faqs = [
   {
-    icon: TrendingUp,
-    title: 'Stratégie & Gouvernance IA',
-    description:
-      'Audit de maturité, roadmap IA priorisée par ROI, conformité IA Act & RGPD. Des fondations solides avant tout déploiement.',
-    items: ['Audit de maturité IA', 'Roadmap & priorisation ROI', 'Gouvernance & IA Act', 'Cartographie cas d\'usage'],
-    color: 'from-blue-500/20 to-cyan-500/10',
-    border: 'border-blue-500/30',
-    iconColor: 'text-blue-400',
-    href: '/offres#conseil',
+    q: 'Quelle est la différence entre un chatbot et un agent IA ?',
+    a: 'Un chatbot répond à des questions. Un agent IA agit : il décompose un objectif complexe, utilise des outils (API, bases de données, applications métiers), prend des décisions et produit des résultats concrets dans vos processus. C\'est un saut qualitatif majeur dans l\'utilisation de l\'IA en entreprise.',
   },
   {
-    icon: GraduationCap,
-    title: 'Formation & Conférences',
-    description:
-      'Acculturation COMEX, formation équipes IT & managers, modules académiques. En entreprise comme en grande école.',
-    items: ['Séminaires COMEX / CODIR', 'Formation équipes IT & métiers', 'Modules ingénieurs & masters', 'Conférences IA stratégiques'],
-    color: 'from-emerald-500/20 to-cyan-500/10',
-    border: 'border-emerald-500/30',
-    iconColor: 'text-emerald-400',
-    href: '/formation',
+    q: 'Pourquoi spécialiser l\'accompagnement sur l\'assurance et les mutuelles ?',
+    a: 'Parce que j\'ai travaillé 23 ans dans ces organisations (Groupama, Macif Finance Épargne, IMA). Je connais les contraintes réglementaires (LCB-FT, RGPD, Solvabilité II), les systèmes d\'information legacy, les processus métiers et la culture. Ce n\'est pas une posture marketing : c\'est ce qui me permet de faire des propositions concrètes plutôt que des frameworks génériques.',
   },
   {
-    icon: Bot,
-    title: 'Agents IA & Automatisation',
-    description:
-      'Conception d\'agents IA métiers, orchestration multi-agents, RAG sécurisé et intégration LLM dans votre SI.',
-    items: ['Agents IA métiers sur mesure', 'Orchestration multi-agents', 'RAG & intégration LLM', 'RPA augmentée par IA'],
-    color: 'from-cyan-500/20 to-teal-500/10',
-    border: 'border-cyan-500/30',
-    iconColor: 'text-cyan-400',
-    href: '/offres#agents',
+    q: 'Pourquoi Claude et pas ChatGPT ou Copilot ?',
+    a: 'Claude (Anthropic) dispose d\'un écosystème complet pour l\'entreprise : projets et skills, connecteurs, Claude Code pour les équipes de développement, et le Model Context Protocol (MCP) pour connecter les agents à votre SI. C\'est l\'environnement le plus abouti pour passer de l\'expérimentation à la production. Je parle aussi des autres solutions dans une logique d\'architecture, mais Claude est ma signature.',
+  },
+  {
+    q: 'Mes équipes n\'ont pas de profil technique — est-ce que vos formations leur conviennent ?',
+    a: 'Oui. Le catalogue propose des formations pour tous les niveaux : de la demi-journée pour les COMEX jusqu\'aux 3 jours pour les équipes IT. Les formations managers et métiers ne nécessitent aucun prérequis technique. L\'objectif est toujours de rendre l\'agentique compréhensible et actionnnable, quel que soit le public.',
+  },
+  {
+    q: 'Comment se passe un premier contact ?',
+    a: 'Je propose un appel découverte de 30 minutes, sans engagement, pour comprendre votre contexte et vos enjeux. À l\'issue, je vous indique si et comment je peux vous aider, et je vous envoie une proposition adaptée dans les 48h.',
+  },
+  {
+    q: 'Intervenez-vous hors de Niort et de la Nouvelle-Aquitaine ?',
+    a: 'Oui, j\'interviens dans toute la France. Les formations peuvent se tenir en présentiel chez vous, en distanciel ou en format mixte. Pour les conférences et séminaires COMEX, je me déplace.',
   },
 ]
 
-const credentials = [
-  { label: '23 ans d\'expertise IT', icon: Award },
-  { label: 'Ingénieur SI — CNAM', icon: GraduationCap },
-  { label: 'Diplômé GEM', icon: Star },
-  { label: 'Auteur de 2 ouvrages IA (Éd. ENI)', icon: BookOpen },
-  { label: 'Interventions grands comptes', icon: Users },
-  { label: 'Enseignant CNAM, CESI & Ifpass', icon: GraduationCap },
-  { label: 'Conférencier IA', icon: Mic2 },
-  { label: 'Expert IA Act & conformité', icon: Shield },
-]
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="border-b border-slate-800/60 last:border-0">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-start justify-between gap-4 py-5 text-left"
+        aria-expanded={open}
+      >
+        <span className="font-medium text-slate-200 text-sm leading-relaxed">{q}</span>
+        {open ? <ChevronUp size={18} className="text-cyan-400 flex-shrink-0 mt-0.5" /> : <ChevronDown size={18} className="text-slate-500 flex-shrink-0 mt-0.5" />}
+      </button>
+      {open && (
+        <p className="pb-5 text-sm text-slate-400 leading-relaxed">{a}</p>
+      )}
+    </div>
+  )
+}
 
-const services = [
-  { icon: Brain,         title: 'Conseil Stratégique IA',    href: '/offres#conseil',      color: 'text-blue-400' },
-  { icon: Bot,           title: 'Déploiement Agents IA',     href: '/offres#agents',       color: 'text-cyan-400' },
-  { icon: Shield,        title: 'IA Générative & Sécurité',  href: '/offres#generative',   color: 'text-purple-400' },
-  { icon: GraduationCap, title: 'Formation & Acculturation', href: '/formation',           color: 'text-emerald-400' },
-  { icon: Network,       title: 'Architecture & Data',       href: '/offres#architecture', color: 'text-orange-400' },
-  { icon: BarChart3,     title: 'Pilotage ROI IA',           href: '/offres#roi',          color: 'text-rose-400' },
-]
-
+/* ── Page ────────────────────────────────────────────────── */
 export default function HomePage() {
   return (
     <>
-      {/* ── HERO ───────────────────────────────────────── */}
+      {/* ── BANDEAU LIVRE À PARAÎTRE ──────────────────────── */}
+      <div className="bg-gradient-to-r from-cyan-600/20 via-blue-600/20 to-cyan-600/20 border-b border-cyan-500/20 py-2 px-4 text-center text-sm text-slate-300">
+        <span className="text-cyan-400 font-semibold">📘 À paraître le 18 novembre 2026</span>
+        {' '}— 2ème édition de{' '}
+        <span className="italic">L&apos;Intelligence Artificielle expliquée</span>
+        {' '}aux Éditions ENI
+        <Link href="/publications" className="ml-3 text-cyan-400 hover:underline text-xs">En savoir plus →</Link>
+      </div>
+
+      {/* ── HERO ─────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800">
         <div className="absolute inset-0 dot-pattern opacity-30" />
         <div className="absolute top-1/4 -right-40 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -100,96 +135,210 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-32 pt-36">
           <div className="max-w-4xl">
 
-            {/* Baseline badge */}
+            {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full px-4 py-1.5 mb-8">
               <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
               <span className="tag text-cyan-400">
-                Stratégie IA&nbsp;•&nbsp;Formation&nbsp;•&nbsp;Agents &amp; Automatisation
+                Niort&nbsp;•&nbsp;Assurance &amp; Mutuelles&nbsp;•&nbsp;IA Agentique &amp; Claude
               </span>
             </div>
 
-            {/* H1 */}
+            {/* H1
+              Variante retenue : résultat client, couvre tout le parcours
+              Autres variantes :
+              V1 — "Le spécialiste de l'IA agentique et de Claude pour l'assurance et les mutuelles"
+              V2 — "Vos POC IA restent des POC. Mes agents, eux, passent en production."
+            */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-100 leading-[1.08] tracking-tight mb-6">
-              Intelligence Artificielle
+              De la gouvernance AI Act
               <br />
-              <span className="gradient-text">Stratégie. Formation.</span>
+              <span className="gradient-text">à votre premier agent IA</span>
               <br />
-              Déploiement.
+              en production
             </h1>
 
             <p className="text-xl text-slate-400 leading-relaxed max-w-2xl mb-10">
-              J&apos;accompagne entreprises et grandes écoles&nbsp;: stratégie IA,
-              formation, agents &amp; automatisation.
+              Je forme les équipes IT et métiers des assureurs, mutuelles et institutions de prévoyance —
+              et j&apos;accompagne le déploiement de leurs agents Claude.
+              <strong className="text-slate-300"> 23 ans dans l&apos;assurance IT, 2 livres ENI, enseignant CNAM.</strong>
             </p>
 
-            <div className="flex flex-wrap gap-4">
-              <Link href="/contact" className="btn-primary text-base px-8 py-4">
-                Prendre rendez-vous
+            {/* CTA */}
+            <div className="flex flex-wrap gap-4 mb-16">
+              <Link href="/ressources" className="btn-primary text-base px-7 py-4">
+                <Download size={18} />
+                Télécharger la grille de maturité IA agentique
+              </Link>
+              <Link href="/formation" className="btn-outline text-base px-7 py-4">
+                Voir les formations Claude &amp; agents
                 <ArrowRight size={18} />
-              </Link>
-              <Link href="/formation" className="btn-outline text-base px-8 py-4">
-                Voir les formations
-              </Link>
-              <Link href="/offres" className="btn-outline text-base px-8 py-4">
-                Nos offres de conseil
               </Link>
             </div>
 
-            {/* Metrics */}
-            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-              {stats.map(({ value, label, icon: Icon }) => (
+            {/* Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { value: '23 ans', label: 'IT dans l\'assurance', icon: Award },
+                { value: '2 livres', label: 'publiés aux Éd. ENI', icon: BookOpen },
+                { value: '8 000+', label: 'exemplaires vendus', icon: Award },
+                { value: 'CNAM · CESI · Ifpass', label: 'enseignant', icon: GraduationCap },
+              ].map(({ value, label, icon: Icon }) => (
                 <div key={label} className="border-l border-slate-700/60 pl-4">
-                  <div className="text-2xl font-bold text-cyan-400">{value}</div>
+                  <div className="text-xl font-bold text-cyan-400">{value}</div>
                   <div className="text-sm text-slate-400 leading-tight mt-0.5">{label}</div>
                 </div>
               ))}
             </div>
           </div>
         </div>
+      </section>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-          <div className="w-px h-10 bg-gradient-to-b from-transparent to-slate-600" />
-          <div className="w-1 h-1 rounded-full bg-slate-500" />
+      {/* ── PROBLÈME ─────────────────────────────────────── */}
+      <section className="py-24 bg-navy-800/40 border-y border-slate-800/50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <div className="tag mb-3">Ce que vivent vos équipes aujourd&apos;hui</div>
+            <div className="cyan-line mx-auto mb-5" />
+            <h2 className="section-title mb-4">Quatre freins qui bloquent l&apos;IA en assurance</h2>
+            <p className="section-subtitle max-w-2xl mx-auto">
+              Ces blocages sont réels, documentés, et ils ont des solutions concrètes.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              {
+                icon: AlertTriangle,
+                color: 'text-amber-400',
+                bg: 'bg-amber-500/10',
+                border: 'border-amber-500/20',
+                title: 'Les POC ne passent pas en production',
+                desc: '80% des projets IA restent au stade de la démonstration. La distance entre « ça marche en démo » et « c\'est industrialisé » reste le principal point de rupture.',
+              },
+              {
+                icon: Shield,
+                color: 'text-red-400',
+                bg: 'bg-red-500/10',
+                border: 'border-red-500/20',
+                title: 'Le shadow AI fait peur',
+                desc: 'Les collaborateurs utilisent ChatGPT avec des données clients, des contrats, des sinistres. Sans cadre, le risque réglementaire et réputationnel est réel.',
+              },
+              {
+                icon: FileText,
+                color: 'text-purple-400',
+                bg: 'bg-purple-500/10',
+                border: 'border-purple-500/20',
+                title: 'Article 4 AI Act : une obligation ignorée',
+                desc: 'L\'article 4 impose la formation de toutes les personnes travaillant avec des systèmes IA à haut risque. La plupart des assureurs ne savent pas encore comment la documenter.',
+              },
+              {
+                icon: Network,
+                color: 'text-blue-400',
+                bg: 'bg-blue-500/10',
+                border: 'border-blue-500/20',
+                title: 'La sécurité des données bloque tout',
+                desc: 'Données clients, contrats, sinistres : l\'exposition à des LLM cloud sans contrôle fait peur aux RSSI et aux DPO. Et ils ont raison — mais des solutions existent.',
+              },
+            ].map(({ icon: Icon, color, bg, border, title, desc }) => (
+              <div key={title} className={`card-glass p-6 border ${border} hover:-translate-y-1 transition-all duration-300`}>
+                <div className={`w-11 h-11 rounded-xl ${bg} flex items-center justify-center mb-4`}>
+                  <Icon size={22} className={color} />
+                </div>
+                <h3 className="font-bold text-slate-100 mb-2 text-sm leading-tight">{title}</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <p className="text-slate-400 text-sm mb-4">
+              J&apos;ai vécu ces problèmes de l&apos;intérieur. Ma méthode va de la gouvernance jusqu&apos;à l&apos;agent en production.
+            </p>
+            <Link href="/claude-ia-agentique" className="btn-outline text-sm">
+              Comprendre ma méthode <ArrowRight size={15} />
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* ── 3 AXES ─────────────────────────────────────── */}
+      {/* ── 3 OFFRES PRODUCTISÉES ────────────────────────── */}
       <section className="py-24 bg-navy-900">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="tag mb-3">Ce que je propose</div>
-            <div className="cyan-line mx-auto mb-4" />
-            <h2 className="section-title mb-4">Trois axes d&apos;intervention</h2>
+          <div className="text-center mb-14">
+            <div className="tag mb-3">Mes offres</div>
+            <div className="cyan-line mx-auto mb-5" />
+            <h2 className="section-title mb-4">Trois façons de travailler ensemble</h2>
             <p className="section-subtitle max-w-2xl mx-auto">
-              Du diagnostic stratégique à la formation terrain, en passant par le déploiement
-              d&apos;agents IA — une approche intégrée et orientée résultats.
+              Des engagements clairs, des livrables précis, un interlocuteur unique
+              qui connaît l&apos;assurance de l&apos;intérieur.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {pillars.map(({ icon: Icon, title, description, items, color, border, iconColor, href }) => (
+            {[
+              {
+                icon: Mic2,
+                color: 'text-purple-400',
+                bg: 'bg-purple-500/10',
+                border: 'border-purple-500/30',
+                badge: 'Keynote ou séminaire',
+                title: 'COMEX « IA agentique »',
+                desc: 'Une demi-journée pour embarquer votre direction. Je présente les enjeux de l\'IA agentique pour votre secteur, les cas d\'usage prioritaires, les risques et la feuille de route. Adapté à vos enjeux spécifiques.',
+                items: ['Keynote ou table ronde dirigeants', 'Cas d\'usage sectoriels concrets', 'Questions-réponses COMEX', 'Support personnalisé'],
+                cta: 'Organiser un séminaire',
+                href: '/contact',
+              },
+              {
+                icon: GraduationCap,
+                color: 'text-cyan-400',
+                bg: 'bg-cyan-500/10',
+                border: 'border-cyan-500/30',
+                badge: 'Formation intra',
+                title: 'Claude & Agents IA',
+                desc: 'Un catalogue de 6 formations certifiantes, de la demi-journée (COMEX) aux 3 jours (équipes IT). Présentiel à Niort, intra chez vous, ou distanciel. Programme adapté à votre contexte.',
+                items: ['6 formations du catalogue', 'De la demi-journée à 3 jours', 'Présentiel, distanciel ou mixte', 'Attestation + supports inclus'],
+                cta: 'Voir le catalogue',
+                href: '/formation',
+                featured: true,
+              },
+              {
+                icon: Bot,
+                color: 'text-emerald-400',
+                bg: 'bg-emerald-500/10',
+                border: 'border-emerald-500/30',
+                badge: 'Diagnostic',
+                title: 'Maturité & feuille de route agentique',
+                desc: 'Un diagnostic structuré pour savoir où vous en êtes et par où commencer. Évaluation de votre maturité, cartographie des cas d\'usage prioritaires, feuille de route agentique avec Claude.',
+                items: ['Grille de maturité complétée', 'Cartographie des cas d\'usage', 'Feuille de route priorisée', 'Restitution dirigeants'],
+                cta: 'Demander un diagnostic',
+                href: '/contact',
+              },
+            ].map(({ icon: Icon, color, bg, border, badge, title, desc, items, cta, href, featured }) => (
               <div
                 key={title}
-                className={`card-glass p-8 border ${border} bg-gradient-to-br ${color} hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col`}
+                className={`card-glass border ${border} p-8 flex flex-col hover:-translate-y-1 hover:shadow-xl transition-all duration-300 relative ${featured ? 'ring-1 ring-cyan-500/40' : ''}`}
               >
-                <div className={`w-12 h-12 rounded-xl bg-slate-800/80 flex items-center justify-center mb-6 ${iconColor} group-hover:scale-110 transition-transform`}>
-                  <Icon size={24} />
+                {featured && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan-500 text-navy-900 text-xs font-bold px-3 py-1 rounded-full">
+                    Le plus demandé
+                  </div>
+                )}
+                <div className={`w-11 h-11 rounded-xl ${bg} flex items-center justify-center mb-4`}>
+                  <Icon size={22} className={color} />
                 </div>
+                <div className={`text-xs font-semibold uppercase tracking-wider ${color} mb-1`}>{badge}</div>
                 <h3 className="text-xl font-bold text-slate-100 mb-3 leading-tight">{title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed mb-6">{description}</p>
-                <ul className="space-y-2 flex-1">
-                  {items.map((item) => (
+                <p className="text-sm text-slate-400 leading-relaxed mb-5 flex-1">{desc}</p>
+                <ul className="space-y-2 mb-7">
+                  {items.map(item => (
                     <li key={item} className="flex items-start gap-2 text-sm text-slate-300">
-                      <CheckCircle2 size={14} className={`${iconColor} mt-0.5 flex-shrink-0`} />
+                      <CheckCircle2 size={13} className={`${color} mt-0.5 flex-shrink-0`} />
                       {item}
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href={href}
-                  className={`mt-6 inline-flex items-center gap-1.5 text-sm font-medium ${iconColor} hover:underline`}
-                >
-                  En savoir plus <ArrowRight size={13} />
+                <Link href={href} className="btn-primary justify-center text-sm">
+                  {cta} <ArrowRight size={14} />
                 </Link>
               </div>
             ))}
@@ -197,196 +346,258 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── SERVICES GRID ──────────────────────────────── */}
-      <section className="py-20 bg-navy-800/40 border-y border-slate-800/50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-10 gap-4">
-            <div>
-              <div className="tag mb-2">Toutes les prestations</div>
-              <h2 className="text-2xl font-bold text-slate-100">Une offre complète &amp; cohérente</h2>
-            </div>
-            <Link href="/offres" className="btn-outline text-sm self-start md:self-auto">
-              Voir toutes les offres <ChevronRight size={16} />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-            {services.map(({ icon: Icon, title, href, color }) => (
-              <Link
-                key={href + title}
-                href={href}
-                className="card-glass p-5 text-center hover:border-slate-600 hover:-translate-y-1 transition-all duration-200 group"
-              >
-                <Icon size={24} className={`${color} mx-auto mb-3 group-hover:scale-110 transition-transform`} />
-                <div className="text-xs font-medium text-slate-300 leading-tight">{title}</div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CREDIBILITE ────────────────────────────────── */}
-      <section className="py-24 bg-navy-900">
+      {/* ── POURQUOI CLAUDE & L'AGENTIQUE ───────────────── */}
+      <section className="py-24 bg-navy-800/40 border-y border-slate-800/50">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="tag mb-3">Le fondateur</div>
-              <div className="cyan-line mb-5" />
-
-              {/* Photo + titre */}
-              <div className="flex items-center gap-5 mb-6">
-                <div className="relative flex-shrink-0">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden ring-2 ring-cyan-500/30 shadow-lg">
-                    <Image
-                      src="/images/david-brenet.jpg"
-                      alt="David Brenet — Expert IA, Formateur & Conférencier"
-                      width={80}
-                      height={80}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <div className="absolute -bottom-1.5 -right-1.5 w-6 h-6 bg-cyan-500 rounded-full flex items-center justify-center">
-                    <div className="w-2.5 h-2.5 bg-white rounded-full" />
-                  </div>
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold text-slate-100">David Brenet</h2>
-                  <p className="gradient-text font-medium">Expert IA, Formateur &amp; Conférencier</p>
-                </div>
-              </div>
-
-              <p className="text-slate-400 leading-relaxed mb-8">
-                Ingénieur en Systèmes d&apos;Information (CNAM), diplômé de Grenoble École de Management,
-                23 ans d&apos;expérience IT dans des environnements grands comptes. Auteur de deux ouvrages
-                aux Éditions ENI sur l&apos;Intelligence Artificielle. Enseignant au CNAM, CESI et Ifpass,
-                conférencier IA auprès de COMEX, institutions publiques et grandes écoles.
+              <div className="tag mb-3">Pourquoi Claude et l&apos;agentique</div>
+              <div className="cyan-line mb-6" />
+              <h2 className="section-title mb-5">
+                Un agent IA, ce n&apos;est pas un chatbot.
+                <br />
+                <span className="gradient-text">C&apos;est un collaborateur numérique.</span>
+              </h2>
+              <p className="text-slate-400 leading-relaxed mb-6">
+                Un agent IA agit de façon autonome : il décompose un objectif, appelle vos outils
+                métiers (API, bases de données, applications), prend des décisions et produit des
+                résultats concrets dans vos processus — avec la supervision humaine que vous décidez.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {credentials.map(({ label, icon: Icon }) => (
-                  <div key={label} className="flex items-center gap-3 py-2">
-                    <div className="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center flex-shrink-0">
-                      <Icon size={15} className="text-cyan-400" />
-                    </div>
-                    <span className="text-sm text-slate-300">{label}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/contact" className="btn-primary">
-                  Contacter David Brenet <ArrowRight size={16} />
-                </Link>
-                <Link href="/formation" className="btn-outline">
-                  Voir les formations
-                </Link>
-              </div>
+              <p className="text-slate-400 leading-relaxed mb-8">
+                J&apos;ai choisi l&apos;écosystème <strong className="text-slate-200">Claude d&apos;Anthropic</strong> parce que c&apos;est
+                aujourd&apos;hui la plateforme la plus complète pour passer de l&apos;expérimentation
+                à la production dans un SI d&apos;assureur.
+              </p>
+              <Link href="/claude-ia-agentique" className="btn-primary">
+                Tout comprendre sur l&apos;IA agentique <ArrowRight size={16} />
+              </Link>
             </div>
 
-            <div className="space-y-5">
-              <div className="card-glass p-8 border-cyan-500/20 relative overflow-hidden">
-                <div className="absolute top-4 right-6 text-cyan-500/20 text-8xl font-serif leading-none select-none">&ldquo;</div>
-                <Quote size={28} className="text-cyan-500 mb-4" />
-                <blockquote className="text-lg text-slate-200 leading-relaxed font-light italic mb-4">
-                  L&apos;IA n&apos;est pas un outil technologique. C&apos;est une transformation
-                  organisationnelle profonde qui exige clarté stratégique, rigueur de gouvernance
-                  et capacité d&apos;industrialisation.
-                </blockquote>
-                <div className="text-sm text-cyan-400 font-medium">— David Brenet</div>
-              </div>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="card-glass p-5 text-center">
-                  <div className="text-3xl font-bold text-cyan-400 mb-1">2</div>
-                  <div className="text-xs text-slate-400">Ouvrages<br />publiés ENI</div>
+            <div className="space-y-3">
+              {[
+                { icon: Bot, color: 'text-cyan-400', bg: 'bg-cyan-500/10', title: 'Claude en entreprise', desc: 'Projets, skills et connecteurs pour déployer Claude dans votre organisation avec contrôle des accès et des données.' },
+                { icon: Code2, color: 'text-blue-400', bg: 'bg-blue-500/10', title: 'Claude Code', desc: 'L\'assistant de développement pour vos équipes IT — revue de code, tests, refactoring, documentation automatique.' },
+                { icon: Network, color: 'text-purple-400', bg: 'bg-purple-500/10', title: 'Model Context Protocol (MCP)', desc: 'Le protocole standard pour connecter les agents à vos outils métiers : ERP, CRM, bases documentaires, APIs internes.' },
+                { icon: Zap, color: 'text-emerald-400', bg: 'bg-emerald-500/10', title: 'SDK d\'agents Claude', desc: 'Pour construire des agents métiers sur mesure — gestion de sinistres, souscription, conformité LCB-FT.' },
+                { icon: Shield, color: 'text-amber-400', bg: 'bg-amber-500/10', title: 'Gouvernance & sécurité', desc: 'Architecture sécurisée, isolation des données clients, conformité RGPD et AI Act intégrée dès la conception.' },
+              ].map(({ icon: Icon, color, bg, title, desc }) => (
+                <div key={title} className="flex gap-4 card-glass p-4 hover:border-slate-600 transition-colors">
+                  <div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center flex-shrink-0`}>
+                    <Icon size={18} className={color} />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-slate-200 text-sm">{title}</div>
+                    <div className="text-xs text-slate-500 leading-relaxed mt-0.5">{desc}</div>
+                  </div>
                 </div>
-                <div className="card-glass p-5 text-center">
-                  <div className="text-3xl font-bold text-cyan-400 mb-1">23</div>
-                  <div className="text-xs text-slate-400">Années<br />d&apos;expertise</div>
-                </div>
-                <div className="card-glass p-5 text-center">
-                  <div className="text-3xl font-bold text-cyan-400 mb-1">3</div>
-                  <div className="text-xs text-slate-400">Écoles<br />partenaires</div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── TRUSTED BY ─────────────────────────────────── */}
-      <TrustedBy title="Ils me font confiance" showLink={true} variant="dark" />
-
-      {/* ── PUBLICATIONS TEASER ────────────────────────── */}
+      {/* ── CAS D'USAGE ASSURANCE ────────────────────────── */}
       <section className="py-24 bg-navy-900">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-14">
-            <div className="tag mb-3">Publications</div>
-            <div className="cyan-line mx-auto mb-4" />
-            <h2 className="section-title mb-4">Ouvrages de référence</h2>
-            <p className="section-subtitle max-w-xl mx-auto">
-              Deux ouvrages publiés aux Éditions ENI, référence éditoriale en informatique professionnelle.
+            <div className="tag mb-3">Cas d&apos;usage</div>
+            <div className="cyan-line mx-auto mb-5" />
+            <h2 className="section-title mb-4">Les agents IA dans votre métier</h2>
+            <p className="section-subtitle max-w-2xl mx-auto">
+              Des cas d&apos;usage concrets, déployables, adaptés aux contraintes réglementaires
+              et techniques de l&apos;assurance et des mutuelles.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              {
-                title: "L'Intelligence Artificielle expliquée",
-                subtitle: "Des concepts de base aux applications avancées de l'IA",
-                year: 'Février 2024',
-                description: "Un ouvrage pédagogique et exhaustif pour comprendre les fondements de l'IA, de l'apprentissage automatique au deep learning, illustré de cas concrets.",
-                color: 'border-cyan-500/30',
-                badge: 'Disponible',
-                badgeColor: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-              },
-              {
-                title: "L'Intelligence Artificielle au service des métiers de l'IT",
-                subtitle: "Comprendre et maîtriser la révolution IA",
-                year: 'Mai 2025',
-                description: "Un guide stratégique et opérationnel destiné aux professionnels IT pour piloter la transformation IA de leurs organisations avec rigueur.",
-                color: 'border-purple-500/30',
-                badge: 'Disponible',
-                badgeColor: 'bg-purple-500/15 text-purple-400 border-purple-500/30',
-              },
-            ].map((book) => (
-              <div key={book.title} className={`card-glass p-8 border ${book.color} hover:-translate-y-1 hover:shadow-xl transition-all duration-300`}>
-                <div className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full border ${book.badgeColor} mb-5`}>
-                  <div className="w-1.5 h-1.5 rounded-full bg-current" />
-                  {book.badge} — {book.year}
+              { domain: 'Sinistres', title: 'Agent de gestion des déclarations', desc: 'Traitement automatique des déclarations entrantes, qualification, déclenchement des workflows et premier contact assuré.', complexity: 'Élevé', gain: 'Fort' },
+              { domain: 'Souscription', title: 'Assistant d\'aide à la souscription', desc: 'Analyse des risques, vérification des antécédents, proposition de garanties adaptées et aide à la décision pour les souscripteurs.', complexity: 'Moyen', gain: 'Fort' },
+              { domain: 'Conformité', title: 'Agent LCB-FT et vigilance réglementaire', desc: 'Surveillance des flux, détection des anomalies, constitution des dossiers de vigilance et alertes automatiques.', complexity: 'Élevé', gain: 'Critique' },
+              { domain: 'Service client', title: 'Assistant multicanal 24/7', desc: 'Traitement des demandes courantes, consultation de contrats, orientation et escalade vers les conseillers humains.', complexity: 'Faible', gain: 'Fort' },
+              { domain: 'Réclamations', title: 'Agent de traitement des réclamations', desc: 'Qualification, instruction et suivi des réclamations. Génération de réponses conformes aux délais réglementaires.', complexity: 'Moyen', gain: 'Moyen' },
+              { domain: 'DSI', title: 'Assistant de code et MCO', desc: 'Claude Code pour les équipes IT : revue de code, génération de tests, documentation et maintien en condition opérationnelle.', complexity: 'Faible', gain: 'Fort' },
+              { domain: 'RH & Formation', title: 'Agent d\'acculturation et formation', desc: 'Formation continue des équipes à l\'IA, réponse aux questions réglementaires, constitution des preuves AI Act article 4.', complexity: 'Faible', gain: 'Moyen' },
+              { domain: 'Data & Actuariat', title: 'Assistant d\'analyse et de reporting', desc: 'Synthèse de données complexes, génération de rapports réglementaires (ORSA, SFCR), aide à l\'analyse actuarielle.', complexity: 'Élevé', gain: 'Fort' },
+            ].map(({ domain, title, desc, complexity, gain }) => (
+              <div key={title} className="card-glass p-5 hover:border-slate-600 hover:-translate-y-0.5 transition-all duration-200">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-semibold text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded-full">{domain}</span>
+                  <div className="flex items-center gap-2 text-xs text-slate-500">
+                    <span>Complexité : <span className={complexity === 'Faible' ? 'text-emerald-400' : complexity === 'Moyen' ? 'text-amber-400' : 'text-red-400'}>{complexity}</span></span>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-slate-100 mb-2 leading-tight">{book.title}</h3>
-                <p className="text-sm text-cyan-400 mb-4 italic">{book.subtitle}</p>
-                <p className="text-sm text-slate-400 leading-relaxed">{book.description}</p>
-                <div className="mt-6 flex items-center gap-2 text-sm text-cyan-400 font-medium">
-                  <BookOpen size={16} />Éditions ENI
-                </div>
+                <h3 className="font-bold text-slate-200 text-sm mb-2 leading-tight">{title}</h3>
+                <p className="text-xs text-slate-500 leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
-          <div className="text-center mt-10">
-            <Link href="/publications" className="btn-outline">
-              Voir les publications <ArrowRight size={16} />
+
+          <div className="mt-10 text-center">
+            <Link href="/ressources" className="btn-outline">
+              <Download size={16} />
+              Télécharger les 10 cas d&apos;usage agentiques complets (PDF)
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── CTA FINAL ──────────────────────────────────── */}
+      {/* ── PREUVES : LIVRES ─────────────────────────────── */}
+      <section className="py-24 bg-navy-800/40 border-y border-slate-800/50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <div className="tag mb-3">Publications</div>
+            <div className="cyan-line mx-auto mb-5" />
+            <h2 className="section-title mb-4">La preuve par l&apos;écrit</h2>
+            <p className="section-subtitle max-w-xl mx-auto">
+              Deux ouvrages aux Éditions ENI, la référence en informatique professionnelle.
+              Plus de 8 000 exemplaires vendus.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {[
+              {
+                img: '/books/ia-expliquee.jpg',
+                badge: '8 000+ exemplaires — 1ère édition 2024',
+                badgeColor: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
+                title: 'L\'Intelligence Artificielle expliquée',
+                subtitle: 'Des concepts de base aux applications avancées de l\'IA',
+                desc: 'La référence pédagogique pour comprendre l\'IA : du machine learning aux agents. Adopté par des entreprises, des écoles et des managers.',
+              },
+              {
+                img: '/books/ia-metiers-it.jpg',
+                badge: 'Disponible — 2025',
+                badgeColor: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
+                title: 'L\'IA pour les professionnels de l\'IT',
+                subtitle: 'Stratégie, architecture et déploiement',
+                desc: 'Le guide opérationnel pour les DSI, architectes et ingénieurs qui pilotent la transformation IA de leur organisation.',
+              },
+              {
+                img: '/books/ia-expliquee.jpg',
+                badge: '🆕 À paraître — 18 novembre 2026',
+                badgeColor: 'bg-cyan-500/15 text-cyan-400 border-cyan-500/30',
+                title: 'L\'Intelligence Artificielle expliquée — 2ème édition',
+                subtitle: 'Des concepts de base aux applications avancées de l\'IA',
+                desc: 'Une édition entièrement mise à jour incluant l\'IA agentique, Claude, le MCP et les nouvelles obligations réglementaires.',
+              },
+            ].map((book) => (
+              <div key={book.title} className="card-glass p-6 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex flex-col">
+                <div className="w-full h-48 bg-navy-800 rounded-xl mb-5 overflow-hidden flex items-center justify-center">
+                  <Image
+                    src={book.img}
+                    alt={book.title}
+                    width={120}
+                    height={170}
+                    className="object-contain h-full p-3"
+                  />
+                </div>
+                <div className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full border ${book.badgeColor} mb-3 self-start`}>
+                  {book.badge}
+                </div>
+                <h3 className="font-bold text-slate-100 text-sm leading-tight mb-1">{book.title}</h3>
+                <p className="text-xs text-cyan-400 italic mb-3">{book.subtitle}</p>
+                <p className="text-xs text-slate-500 leading-relaxed flex-1">{book.desc}</p>
+                <div className="mt-4 flex items-center gap-2 text-xs text-slate-500">
+                  <BookOpen size={13} />Éditions ENI
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link href="/publications" className="btn-outline text-sm">
+              Voir toutes les publications <ArrowRight size={15} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TRUSTED BY ───────────────────────────────────── */}
+      <TrustedBy title="Ils m'ont fait confiance" showLink={true} variant="dark" />
+
+      {/* ── PROCHAINE SESSION ────────────────────────────── */}
+      <section className="py-16 bg-navy-900 border-b border-slate-800/50">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="tag mb-3 text-emerald-400">Prochaine session inter-entreprises</div>
+          <h2 className="text-2xl font-bold text-slate-100 mb-4">
+            {/* À COMPLÉTER : titre et date de la prochaine session inter */}
+            Formation inter-entreprises <span className="gradient-text">[À COMPLÉTER]</span>
+          </h2>
+          <div className="card-glass p-8 max-w-2xl mx-auto border-emerald-500/20">
+            <div className="flex flex-col sm:flex-row items-center gap-6">
+              <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                <Calendar size={28} className="text-emerald-400" />
+              </div>
+              <div className="text-left">
+                <div className="font-bold text-slate-100 mb-1">[À COMPLÉTER : titre de la formation]</div>
+                <div className="text-emerald-400 text-sm mb-1">📅 [À COMPLÉTER : date] — [À COMPLÉTER : lieu ou distanciel]</div>
+                <div className="text-slate-400 text-sm">[À COMPLÉTER : description courte de la session]</div>
+              </div>
+              <Link href="/contact" className="btn-primary text-sm whitespace-nowrap flex-shrink-0">
+                S&apos;inscrire <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── NEWSLETTER ───────────────────────────────────── */}
+      <section className="py-20 bg-gradient-to-br from-navy-800 to-navy-950 border-b border-slate-800/50">
+        <div className="max-w-2xl mx-auto px-6 text-center">
+          <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mx-auto mb-5">
+            <Mail size={22} className="text-cyan-400" />
+          </div>
+          <div className="tag mb-3">Newsletter mensuelle</div>
+          <h2 className="text-2xl font-bold text-slate-100 mb-3">
+            Chaque mois : 1 cas d&apos;usage agentique en assurance décortiqué
+          </h2>
+          <p className="text-slate-400 mb-2 leading-relaxed">
+            + l&apos;actualité Claude, les nouvelles obligations AI Act et une ressource pratique.
+          </p>
+          <p className="text-slate-500 text-sm mb-8">Pas de spam. Désinscription en un clic.</p>
+          <NewsletterForm />
+        </div>
+      </section>
+
+      {/* ── FAQ ──────────────────────────────────────────── */}
+      <section className="py-24 bg-navy-900">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="tag mb-3">FAQ</div>
+            <div className="cyan-line mx-auto mb-5" />
+            <h2 className="section-title">Questions fréquentes</h2>
+          </div>
+          <div className="card-glass p-2">
+            {faqs.map((faq) => (
+              <div key={faq.q} className="px-4">
+                <FaqItem q={faq.q} a={faq.a} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA FINAL ────────────────────────────────────── */}
       <section className="py-24 bg-gradient-to-br from-navy-800 to-navy-950 relative overflow-hidden">
         <div className="absolute inset-0 dot-pattern opacity-20" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-cyan-500/8 rounded-full blur-3xl" />
         <div className="relative max-w-3xl mx-auto px-6 text-center">
-          <div className="tag mb-4">Passez à l&apos;action</div>
+          <div className="tag mb-4">Passons à l&apos;action</div>
           <h2 className="text-4xl md:text-5xl font-bold text-slate-100 mb-6 tracking-tight">
-            Conseil, formation ou déploiement —<br />
-            <span className="gradient-text">parlons de votre projet IA</span>
+            Un appel de 30 min,<br />
+            <span className="gradient-text">sans engagement</span>
           </h2>
           <p className="text-lg text-slate-400 leading-relaxed mb-10">
-            Un premier échange confidentiel pour comprendre vos enjeux, qualifier
-            le potentiel de l&apos;IA dans votre organisation et définir les premières étapes.
+            Je comprends votre contexte, j&apos;identifie le premier levier actionnable,
+            et je vous dis franchement si et comment je peux vous aider.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/contact" className="btn-primary text-base px-10 py-4">
-              Demander une consultation <ArrowRight size={18} />
+              Prendre rendez-vous <ArrowRight size={18} />
             </Link>
-            <Link href="/formation" className="btn-outline text-base px-10 py-4">
-              Explorer les formations
+            <Link href="/ressources" className="btn-outline text-base px-10 py-4">
+              <Download size={18} /> Ressources gratuites
             </Link>
           </div>
         </div>

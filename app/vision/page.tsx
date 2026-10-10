@@ -1,72 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, AlertTriangle, CheckCircle2, Lightbulb, Shield, Database, Users, TrendingUp, Cpu } from 'lucide-react'
+import { ArrowRight, AlertTriangle, CheckCircle2, Lightbulb, Shield, Database, Users, TrendingUp, Cpu, Bot, Network } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Notre Vision — L\'IA comme transformation organisationnelle',
+  title: 'Ma Vision — L\'IA agentique au service de l\'assurance',
   description:
-    'Pourquoi l\'IA nécessite une approche stratégique, une gouvernance rigoureuse et une architecture maîtrisée. La vision du Cabinet David Brenet sur la transformation par l\'IA.',
+    'Ma vision de l\'IA agentique pour l\'assurance et les mutuelles : pourquoi la plupart des projets échouent, ce qu\'il faut changer, et comment passer vraiment en production. David Brenet, expert IA, Niort.',
   alternates: { canonical: 'https://davidbrenet.com/vision' },
 }
-
-const risks = [
-  { title: 'Déploiements non gouvernés', desc: 'Des usages IA non encadrés exposent l\'entreprise à des risques réglementaires, sécuritaires et réputationnels.' },
-  { title: 'Absence de stratégie', desc: 'Des projets IA dispersés sans alignement stratégique génèrent de la dette technique et des ROI décevants.' },
-  { title: 'Données non structurées', desc: 'Sans une architecture data solide, l\'IA ne peut pas délivrer sa valeur potentielle. Les données sont le carburant de l\'IA.' },
-  { title: 'Résistance au changement', desc: 'L\'adoption réelle nécessite une conduite du changement structurée et une acculturation de toutes les parties prenantes.' },
-]
-
-const principles = [
-  {
-    icon: TrendingUp,
-    title: 'L\'IA, moteur de transformation',
-    body: 'L\'Intelligence Artificielle n\'est pas un outil parmi d\'autres. Elle redéfinit fondamentalement les processus métiers, les chaînes de valeur, les modèles organisationnels et les dynamiques concurrentielles. Les organisations qui appréhendent l\'IA comme un simple logiciel passeront à côté de l\'essentiel.',
-    color: 'text-blue-400',
-    bg: 'bg-blue-500/10',
-  },
-  {
-    icon: Shield,
-    title: 'La gouvernance avant tout',
-    body: 'Déployer l\'IA sans gouvernance, c\'est construire sur du sable. La maîtrise des risques (biais, hallucinations, fuites de données, conformité IA Act) est une condition sine qua non d\'une IA industrialisable et durable. Notre approche place la gouvernance au centre, non en périphérie.',
-    color: 'text-purple-400',
-    bg: 'bg-purple-500/10',
-  },
-  {
-    icon: Database,
-    title: 'L\'architecture comme fondation',
-    body: 'Une IA performante repose sur une architecture SI cohérente : données qualifiées, pipelines robustes, API bien conçues, socle cloud maîtrisé. Nous intervenons sur l\'ensemble du stack pour garantir que l\'IA s\'intègre durablement dans votre système d\'information.',
-    color: 'text-cyan-400',
-    bg: 'bg-cyan-500/10',
-  },
-  {
-    icon: Users,
-    title: 'L\'humain au cœur du dispositif',
-    body: 'La révolution IA ne se fait pas malgré les collaborateurs, mais avec eux. L\'acculturation, la formation et la conduite du changement sont des leviers aussi critiques que la technologie elle-même. Nous accordons une importance égale à la dimension humaine et technique.',
-    color: 'text-emerald-400',
-    bg: 'bg-emerald-500/10',
-  },
-  {
-    icon: Cpu,
-    title: 'La maîtrise technique comme différenciateur',
-    body: 'Comprendre les LLM, les architectures RAG, l\'orchestration multi-agents ou les pipelines data n\'est pas réservé aux équipes R&D. Les directions IT et les COMEX doivent s\'approprier ces concepts pour exercer une maîtrise effective de leur transformation IA.',
-    color: 'text-orange-400',
-    bg: 'bg-orange-500/10',
-  },
-  {
-    icon: Lightbulb,
-    title: 'La valeur comme boussole',
-    body: 'Chaque projet IA doit être évalué à l\'aune de la valeur qu\'il génère : gain de productivité, amélioration de l\'expérience client, réduction des risques, différenciation concurrentielle. Nous pilotons systématiquement les initiatives IA par les indicateurs de valeur métiers.',
-    color: 'text-yellow-400',
-    bg: 'bg-yellow-500/10',
-  },
-]
-
-const approach = [
-  { step: '01', title: 'Diagnostic', desc: 'Audit de maturité IA, cartographie des usages existants et des opportunités, évaluation de la dette technique.' },
-  { step: '02', title: 'Stratégie', desc: 'Définition de la roadmap IA, priorisation des cas d\'usage par ROI, choix architecturaux et gouvernance.' },
-  { step: '03', title: 'Déploiement', desc: 'Conception et intégration des agents IA, automatisation des processus, intégration dans le SI existant.' },
-  { step: '04', title: 'Industrialisation', desc: 'Mise à l\'échelle, pilotage de la valeur, formation des équipes, amélioration continue.' },
-]
 
 export default function VisionPage() {
   return (
@@ -74,63 +15,77 @@ export default function VisionPage() {
       {/* Hero */}
       <section className="relative pt-32 pb-20 bg-gradient-to-br from-navy-950 to-navy-900 overflow-hidden">
         <div className="absolute inset-0 dot-pattern opacity-20" />
-        <div className="absolute right-0 top-1/3 w-96 h-96 bg-purple-600/8 rounded-full blur-3xl" />
         <div className="relative max-w-4xl mx-auto px-6 lg:px-8">
-          <div className="tag mb-3">Notre Vision</div>
+          <div className="tag mb-3">Ma vision</div>
           <div className="cyan-line mb-6" />
           <h1 className="text-5xl md:text-6xl font-bold text-slate-100 leading-tight mb-6">
-            L&apos;IA n&apos;est pas un outil.<br />
-            <span className="gradient-text">C&apos;est une transformation.</span>
+            L&apos;IA agentique n&apos;est pas
+            <br />
+            <span className="gradient-text">un projet informatique</span>
           </h1>
-          <p className="text-xl text-slate-400 leading-relaxed max-w-3xl">
-            Trop d&apos;organisations abordent l&apos;Intelligence Artificielle comme un projet informatique
-            parmi d&apos;autres. Nous pensons qu&apos;il s&apos;agit d&apos;une recomposition profonde des modes
-            de travail, des processus et des modèles de création de valeur.
+          <p className="text-xl text-slate-400 leading-relaxed max-w-2xl">
+            C&apos;est une transformation organisationnelle qui demande clarté stratégique,
+            rigueur de gouvernance et capacité d&apos;industrialisation.
+            Voici ce que j&apos;observe depuis 23 ans dans l&apos;assurance — et ce que j&apos;en fais.
           </p>
         </div>
       </section>
 
-      {/* Risques */}
+      {/* Ce que j'observe */}
       <section className="py-20 bg-navy-900">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <AlertTriangle size={20} className="text-amber-400" />
-              <h2 className="text-2xl font-bold text-slate-100">Les pièges à éviter</h2>
-            </div>
-            <p className="text-slate-400">Quatre écueils récurrents que nous observons dans les transformations IA non structurées.</p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {risks.map((risk, i) => (
-              <div key={risk.title} className="card-glass p-6 border-amber-500/20">
-                <div className="text-amber-500/40 font-bold text-4xl mb-4 font-display">0{i + 1}</div>
-                <h3 className="text-slate-200 font-semibold mb-2">{risk.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{risk.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="tag mb-3">Le diagnostic</div>
+          <div className="cyan-line mb-6" />
+          <h2 className="text-3xl font-bold text-slate-100 mb-8">
+            Pourquoi 80% des projets IA n&apos;aboutissent pas
+          </h2>
 
-      {/* Principes */}
-      <section className="py-24 bg-navy-800/30 border-y border-slate-800/50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="tag mb-3">Nos convictions</div>
-            <div className="cyan-line mx-auto mb-4" />
-            <h2 className="section-title mb-4">Six principes fondateurs</h2>
-            <p className="section-subtitle max-w-2xl mx-auto">
-              Ces convictions guident chacune de nos interventions et structurent notre approche conseil.
-            </p>
-          </div>
+          <p className="text-slate-400 leading-relaxed mb-6">
+            J&apos;ai passé 23 ans dans des DSI d&apos;assureurs et de mutuelles — Groupama,
+            Macif Finance Épargne, IMA. J&apos;ai piloté des équipes, porté des projets de
+            transformation, et observé de l&apos;intérieur ce qui fonctionne et ce qui échoue.
+          </p>
+          <p className="text-slate-400 leading-relaxed mb-10">
+            Depuis que j&apos;accompagne des organisations dans leur déploiement IA, je retrouve
+            les mêmes blocages partout. Ils ne sont pas techniques.
+          </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {principles.map(({ icon: Icon, title, body, color, bg }) => (
-              <div key={title} className="card-glass p-8 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-                <div className={`w-12 h-12 rounded-xl ${bg} flex items-center justify-center mb-5`}>
-                  <Icon size={22} className={color} />
+          <div className="grid md:grid-cols-2 gap-5 mb-14">
+            {[
+              {
+                icon: AlertTriangle,
+                color: 'text-amber-400',
+                bg: 'bg-amber-500/10',
+                title: 'Le syndrome du POC permanent',
+                body: 'On démontre, on impressionne, et on recommence avec un autre sujet. La question « comment on industrialise ? » est repoussée jusqu\'à ce que le budget soit épuisé et l\'enthousiasme retombé.',
+              },
+              {
+                icon: Database,
+                color: 'text-blue-400',
+                bg: 'bg-blue-500/10',
+                title: 'La donnée, toujours la donnée',
+                body: 'L\'IA ne peut pas être meilleure que les données qu\'on lui fournit. Dans l\'assurance, les données sont souvent éparpillées, mal structurées, vieilles. Sans travail sur la donnée, l\'agent IA sera médiocre.',
+              },
+              {
+                icon: Users,
+                color: 'text-purple-400',
+                bg: 'bg-purple-500/10',
+                title: 'L\'organisation pas prête',
+                body: 'Déployer un agent IA sans avoir formé les équipes, sans gouvernance, sans sponsor COMEX est la garantie d\'un rejet. La technologie est rarement le problème — l\'adoption l\'est presque toujours.',
+              },
+              {
+                icon: Shield,
+                color: 'text-red-400',
+                bg: 'bg-red-500/10',
+                title: 'La peur qui paralyse',
+                body: 'RGPD, LCB-FT, Solvabilité II, AI Act... Dans l\'assurance, le réflexe est souvent de ne rien faire plutôt que de risquer une non-conformité. Pourtant, l\'inaction est elle aussi un risque.',
+              },
+            ].map(({ icon: Icon, color, bg, title, body }) => (
+              <div key={title} className={`card-glass p-6 border border-${color.replace('text-', '')}/20`}>
+                <div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center mb-4`}>
+                  <Icon size={20} className={color} />
                 </div>
-                <h3 className="text-lg font-bold text-slate-100 mb-3">{title}</h3>
+                <h3 className="font-bold text-slate-100 mb-2 text-sm">{title}</h3>
                 <p className="text-sm text-slate-400 leading-relaxed">{body}</p>
               </div>
             ))}
@@ -138,53 +93,93 @@ export default function VisionPage() {
         </div>
       </section>
 
-      {/* Approche */}
-      <section className="py-24 bg-navy-900">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            <div>
-              <div className="tag mb-3">Notre méthode</div>
-              <div className="cyan-line mb-5" />
-              <h2 className="section-title mb-5">Une approche en quatre temps</h2>
-              <p className="text-slate-400 leading-relaxed mb-8">
-                Structurée, itérative et orientée valeur. Notre méthodologie s&apos;adapte à la maturité
-                de chaque organisation tout en garantissant une progression cohérente et maîtrisée.
-              </p>
-              <Link href="/offres" className="btn-primary">
-                Découvrir nos offres <ArrowRight size={16} />
-              </Link>
-            </div>
-            <div className="space-y-4">
-              {approach.map(({ step, title, desc }) => (
-                <div key={step} className="flex gap-6 card-glass p-6 hover:border-slate-600 transition-colors">
-                  <div className="text-4xl font-bold text-cyan-500/30 font-display flex-shrink-0 leading-none">
-                    {step}
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-slate-100 mb-1.5">{title}</h3>
-                    <p className="text-sm text-slate-400 leading-relaxed">{desc}</p>
-                  </div>
+      {/* Ma vision */}
+      <section className="py-20 bg-navy-800/40 border-y border-slate-800/50">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="tag mb-3">Ma position</div>
+          <div className="cyan-line mb-6" />
+          <h2 className="text-3xl font-bold text-slate-100 mb-8">
+            Ce en quoi je crois profondément
+          </h2>
+
+          <div className="space-y-8">
+            {[
+              {
+                icon: TrendingUp,
+                color: 'text-cyan-400',
+                title: 'L\'agentique est la prochaine vague de valeur',
+                body: 'Les chatbots et la génération de texte ne sont que la surface visible de l\'IA. La vraie valeur est dans les agents qui agissent : qui déclenchent un workflow, instruisent un dossier, surveillent une anomalie, génèrent un rapport réglementaire. C\'est là que l\'assurance peut prendre un avantage concurrentiel durable.',
+              },
+              {
+                icon: Bot,
+                color: 'text-blue-400',
+                title: 'Claude est la plateforme la plus sérieuse pour l\'entreprise',
+                body: 'J\'ai évalué les principales plateformes IA. Claude (Anthropic) se distingue par sa rigueur de conception (Constitutional AI), son écosystème complet (Claude Code, MCP, SDK d\'agents) et sa politique de sécurité adaptée aux données sensibles. C\'est aujourd\'hui ma recommandation principale pour les assureurs.',
+              },
+              {
+                icon: Network,
+                color: 'text-emerald-400',
+                title: 'La gouvernance doit précéder le déploiement',
+                body: 'Je refuse de déployer des agents sans avoir posé les fondations : politique d\'usage, classification des données, supervision humaine, documentation AI Act. Ce n\'est pas de la bureaucratie — c\'est ce qui rend le déploiement durable et industrialisable. Et dans l\'assurance, c\'est aussi une obligation.',
+              },
+              {
+                icon: Lightbulb,
+                color: 'text-amber-400',
+                title: 'La formation est le levier le plus rapide',
+                body: 'Avant même de déployer un agent, former les équipes change la perception, réduit les peurs infondées et fait émerger les meilleurs cas d\'usage. J\'ai vu des organisations transformer leur relation à l\'IA en une seule journée de formation bien conçue.',
+              },
+              {
+                icon: CheckCircle2,
+                color: 'text-purple-400',
+                title: 'Un interlocuteur unique, du début à la fin',
+                body: 'Je ne vends pas des préconisations que d\'autres mettent en œuvre. J\'accompagne de la stratégie au premier agent en production — et si je n\'ai pas les compétences pour une partie du projet, je le dis clairement plutôt que de sous-traiter sans transparence.',
+              },
+            ].map(({ icon: Icon, color, title, body }) => (
+              <div key={title} className="flex gap-5">
+                <div className={`w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center flex-shrink-0 mt-1`}>
+                  <Icon size={20} className={color} />
                 </div>
-              ))}
-            </div>
+                <div>
+                  <h3 className="font-bold text-slate-100 mb-2">{title}</h3>
+                  <p className="text-slate-400 leading-relaxed text-sm">{body}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-gradient-to-r from-navy-800 to-navy-950 relative overflow-hidden">
-        <div className="absolute inset-0 dot-pattern opacity-20" />
-        <div className="relative max-w-3xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-100 mb-5">
-            Partagez-vous cette vision ?
+      {/* Mon parcours */}
+      <section className="py-20 bg-navy-900">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="tag mb-3">Mon parcours</div>
+          <div className="cyan-line mb-6" />
+          <h2 className="text-3xl font-bold text-slate-100 mb-6">
+            Du côté client pendant 23 ans
           </h2>
-          <p className="text-lg text-slate-400 mb-8 leading-relaxed">
-            Discutons de votre contexte et de la manière dont nous pouvons vous accompagner
-            dans une transformation IA structurée et durable.
+          <p className="text-slate-400 leading-relaxed mb-6">
+            C&apos;est ce qui me différencie de la plupart des consultants IA : j&apos;ai été
+            de l&apos;autre côté. J&apos;ai piloté des DSI d&apos;assureur, managé jusqu&apos;à 60 personnes,
+            porté des projets de transformation face aux mêmes contraintes réglementaires,
+            budgétaires et organisationnelles que mes clients d&apos;aujourd&apos;hui.
           </p>
-          <Link href="/contact" className="btn-primary text-base px-8 py-4">
-            Organiser un échange <ArrowRight size={18} />
-          </Link>
+          <p className="text-slate-400 leading-relaxed mb-6">
+            J&apos;enseigne au CNAM, au CESI et à l&apos;Ifpass parce que je crois que
+            la pédagogie est une compétence clé pour l&apos;adoption. J&apos;ai écrit deux livres
+            aux Éditions ENI parce que vulgariser sans simplifier est l&apos;exercice le plus
+            utile que je puisse faire pour le secteur.
+          </p>
+          <p className="text-slate-400 leading-relaxed mb-10">
+            Je suis basé à Niort, capitale des mutuelles françaises. Ce n&apos;est pas un hasard.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Link href="/contact" className="btn-primary">
+              Prendre rendez-vous <ArrowRight size={16} />
+            </Link>
+            <Link href="/cas-clients" className="btn-outline">
+              Voir mes études de cas
+            </Link>
+          </div>
         </div>
       </section>
     </>
