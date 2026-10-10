@@ -18,7 +18,7 @@ export default function MentionsLegalesPage() {
         <div className="space-y-8 text-slate-400 leading-relaxed">
           <section>
             <h2 className="text-xl font-bold text-slate-200 mb-3">Éditeur du site</h2>
-            <p>Cabinet David Brenet<br />Niort, Nouvelle-Aquitaine, France<br />Email : contact@davidbrenet.com</p>
+            <p>Cabinet David Brenet<br />Niort, Nouvelle-Aquitaine, France<br />Email : brenet.david@gmail.com</p>
           </section>
           <section>
             <h2 className="text-xl font-bold text-slate-200 mb-3">Hébergement</h2>
@@ -35,7 +35,7 @@ export default function MentionsLegalesPage() {
             <p>Les informations recueillies via le formulaire de contact sont utilisées uniquement pour
             répondre à votre demande. Elles ne sont jamais cédées à des tiers. Conformément au RGPD,
             vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression de vos données.
-            Pour exercer ce droit, contactez : contact@davidbrenet.com</p>
+            Pour exercer ce droit, contactez : brenet.david@gmail.com</p>
           </section>
         </div>
       </div>

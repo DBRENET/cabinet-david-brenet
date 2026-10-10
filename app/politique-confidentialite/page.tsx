@@ -35,7 +35,7 @@ export default function PolitiqueConfidentialitePage() {
             <h2 className="text-xl font-bold text-slate-200 mb-3">Vos droits (RGPD)</h2>
             <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :
             accès, rectification, suppression, portabilité et opposition. Pour exercer ces droits, contactez-nous :
-            contact@davidbrenet.com</p>
+            brenet.david@gmail.com</p>
           </section>
           <section>
             <h2 className="text-xl font-bold text-slate-200 mb-3">Cookies</h2>

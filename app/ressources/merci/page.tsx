@@ -12,7 +12,7 @@ const nextSteps = [
   {
     icon: BookOpen,
     title: 'Lire le guide Claude & IA agentique',
-    desc: 'Comprendre l\'écosystème Claude Anthropic et ses applications en assurance.',
+    desc: 'Comprendre l\'écosystème Claude Anthropic, Gemini et Copilot et leurs applications en entreprise.',
     href: '/claude-ia-agentique',
     label: 'Lire le guide',
   },
@@ -51,8 +51,8 @@ export default function MerciPage() {
         </p>
         <p className="text-sm text-slate-500 mb-12">
           Un problème ? Écrivez-moi à{' '}
-          <a href="mailto:contact@davidbrenet.com" className="text-cyan-400 hover:underline">
-            contact@davidbrenet.com
+          <a href="mailto:brenet.david@gmail.com" className="text-cyan-400 hover:underline">
+            brenet.david@gmail.com
           </a>
         </p>
 

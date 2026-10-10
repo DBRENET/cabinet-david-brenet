@@ -165,7 +165,7 @@ const formations = [
       'Comprendre l\'architecture des agents IA et les patterns d\'orchestration',
       'Concevoir un agent Claude avec le SDK officiel Anthropic',
       'Implémenter le Model Context Protocol (MCP) pour connecter Claude à vos outils',
-      'Sécuriser un agent IA pour un usage en production dans un SI d\'assureur',
+      'Sécuriser un agent IA pour un usage en production dans un SI d\'entreprise',
       'Évaluer la qualité et monitorer un agent en production',
     ],
     programme: [
@@ -205,7 +205,7 @@ const formations = [
     ],
     livrables: [
       'Kit de démarrage agents Claude (SDK, exemples, tests)',
-      'Template serveur MCP pour SI assurantiel',
+      'Template serveur MCP pour votre SI',
       'Checklist sécurité et conformité agents IA',
       'Template fiche agent AI Act',
       'Attestation de formation',
@@ -415,12 +415,11 @@ export default function FormationPage() {
           <div className="cyan-line mb-6" />
           <h1 className="text-5xl md:text-6xl font-bold text-slate-100 leading-tight mb-6">
             6 formations Claude &amp; IA agentique<br />
-            <span className="gradient-text">pour l&apos;assurance et les mutuelles</span>
+            <span className="gradient-text">pour les entreprises de tous secteurs</span>
           </h1>
           <p className="text-xl text-slate-400 leading-relaxed max-w-2xl mb-8">
             De la demi-journée COMEX au parcours 3 jours pour vos équipes IT — des formations
-            toutes construites sur des cas d&apos;usage réels de l&apos;assurance, la mutuelle
-            et la finance mutualiste.
+            toutes construites sur des cas d&apos;usage réels, adaptés à votre secteur.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/contact?sujet=formation" className="btn-primary text-base px-8 py-4">
@@ -649,8 +648,8 @@ export default function FormationPage() {
                   {
                     icon: Target,
                     color: 'text-cyan-400',
-                    title: 'Cas d\'usage 100% assurance',
-                    body: 'Chaque exercice, chaque exemple est tiré de la réalité des assureurs, mutuelles et IP. Pas de cas génériques.',
+                    title: 'Cas d\'usage sectoriels',
+                    body: 'Chaque exercice, chaque exemple est adapté à votre secteur. Mon expérience en assurance, banque, industrie et secteur public nourrit des cas concrets.',
                   },
                   {
                     icon: Brain,

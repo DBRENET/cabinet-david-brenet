@@ -67,7 +67,7 @@ const jsonLd = {
       jobTitle: 'Expert IA Agentique — Formation & Déploiement Claude pour l\'Assurance',
       description: 'Ingénieur SI (CNAM), 23 ans d\'expérience IT dans l\'assurance et la finance mutualiste. Auteur de 2 livres ENI sur l\'IA. Enseignant CNAM, CESI, Ifpass. Spécialiste de l\'écosystème Claude (Anthropic) et de l\'IA agentique pour l\'assurance.',
       url: 'https://davidbrenet.com',
-      email: 'contact@davidbrenet.com',
+      email: 'brenet.david@gmail.com',
       telephone: '+33618162500',
       address: {
         '@type': 'PostalAddress',
@@ -118,7 +118,7 @@ const jsonLd = {
       name: 'David Brenet — IA Agentique & Claude pour l\'Assurance',
       description: 'Formation et déploiement d\'agents IA avec Claude pour les assureurs, mutuelles et institutions de prévoyance.',
       url: 'https://davidbrenet.com',
-      email: 'contact@davidbrenet.com',
+      email: 'brenet.david@gmail.com',
       telephone: '+33618162500',
       founder: { '@id': 'https://davidbrenet.com/#person' },
       areaServed: { '@type': 'Country', name: 'France' },

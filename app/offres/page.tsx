@@ -8,7 +8,7 @@ import {
 export const metadata: Metadata = {
   title: 'Mes Offres — Conseil IA Agentique, Formation Claude & Déploiement Agents | David Brenet',
   description:
-    'Mes offres pour les assureurs et mutuelles : keynote COMEX IA agentique, formation intra Claude & agents, diagnostic maturité agentique, déploiement d\'agents Claude. David Brenet, Niort.',
+    'Mes offres pour les entreprises de tous secteurs : keynote COMEX IA agentique, formation intra Claude & agents, diagnostic maturité agentique, déploiement d\'agents Claude. David Brenet, Niort.',
   keywords: [
     'conseil IA agentique assurance',
     'formation Claude entreprise',
@@ -32,12 +32,12 @@ const offers = [
     title: 'COMEX « IA agentique »',
     tagline: 'Embarquer votre direction en une demi-journée',
     description:
-      'Une intervention sur mesure pour votre comité de direction. Je présente les enjeux de l\'IA agentique pour l\'assurance, les cas d\'usage prioritaires de votre secteur, les risques réels (et ceux qui sont surestimés), et les premières décisions à prendre.',
+      'Une intervention sur mesure pour votre comité de direction. Je présente les enjeux de l\'IA agentique pour votre secteur, les cas d\'usage prioritaires de votre organisation, les risques réels (et ceux qui sont surestimés), et les premières décisions à prendre.',
     services: [
       { title: 'Keynote d\'ouverture ou clôture', desc: 'Format 45 min à 1h30 — pour une conférence interne, un séminaire ou un événement sectoriel.' },
       { title: 'Atelier COMEX / CODIR', desc: 'Demi-journée interactive avec questions-réponses et cartographie des enjeux pour votre organisation.' },
       { title: 'Table ronde dirigeants', desc: 'Animation d\'une table ronde sur l\'IA agentique pour votre secteur, avec intervenants internes ou externes.' },
-      { title: 'Support personnalisé', desc: 'Deck adapté à votre contexte (assurance, mutuelle, bancassurance, prévoyance) avec vos cas d\'usage.' },
+      { title: 'Support personnalisé', desc: 'Deck adapté à votre secteur et vos cas d\'usage spécifiques.' },
     ],
     deliverables: ['Support de présentation personnalisé', 'Synthèse des échanges', 'Recommandations premières étapes', 'Ressources pour aller plus loin'],
     audience: 'COMEX, CODIR, CA, Direction générale',
@@ -53,11 +53,11 @@ const offers = [
     title: 'Claude & Agents IA',
     tagline: 'Un catalogue de 6 formations certifiantes',
     description:
-      'Des formations conçues pour les équipes des assureurs et mutuelles, de la demi-journée pour les dirigeants aux 3 jours pour les équipes IT. Chaque formation est dispensée en présentiel, en distanciel ou en format mixte, avec un programme adapté à votre contexte sectoriel.',
+      'Des formations conçues pour les équipes des entreprises de tous secteurs, de la demi-journée pour les dirigeants aux 3 jours pour les équipes IT. Chaque formation est dispensée en présentiel, en distanciel ou en format mixte, avec un programme adapté à votre contexte sectoriel.',
     services: [
       { title: 'Claude pour les managers et équipes métiers (1 jour)', desc: 'Usages avancés, projets, skills, sécurité des données — sans prérequis technique.' },
       { title: 'Claude Code pour les équipes IT (2 jours)', desc: 'Workflows, revue de code, tests, sécurité, gouvernance — pour les développeurs et architectes.' },
-      { title: 'Concevoir et déployer des agents avec Claude et MCP (3 jours)', desc: 'Architecture, SDK, Model Context Protocol, mise en production — atelier fil rouge assurance.' },
+      { title: 'Concevoir et déployer des agents avec Claude et MCP (3 jours)', desc: 'Architecture, SDK, Model Context Protocol, mise en production — atelier fil rouge sur votre secteur.' },
       { title: 'IA agentique pour COMEX / CODIR (½ journée)', desc: 'Comprendre l\'agentique, les enjeux et les décisions à prendre — pour les dirigeants.' },
       { title: 'AI Act & gouvernance de l\'IA agentique (1 jour)', desc: 'Article 4, obligations de formation, cartographie des risques, documentation.' },
       { title: 'Atelier cas d\'usage & prototypage (1 jour)', desc: 'Identifier, prioriser et prototyper un premier agent IA — équipe mixte métier + IT.' },

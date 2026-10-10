@@ -11,6 +11,7 @@ import {
   Download, Calendar, Mail, FileText, Users, Building2,
 } from 'lucide-react'
 import { TrustedBy } from '@/components/TrustedBy'
+import { AiNewsFeedClient } from '@/components/AiNewsFeedClient'
 
 /* ── Newsletter inline ───────────────────────────────────── */
 function NewsletterForm() {
@@ -73,12 +74,12 @@ const faqs = [
     a: 'Un chatbot répond à des questions. Un agent IA agit : il décompose un objectif complexe, utilise des outils (API, bases de données, applications métiers), prend des décisions et produit des résultats concrets dans vos processus. C\'est un saut qualitatif majeur dans l\'utilisation de l\'IA en entreprise.',
   },
   {
-    q: 'Pourquoi spécialiser l\'accompagnement sur l\'assurance et les mutuelles ?',
-    a: 'Parce que j\'ai travaillé 23 ans dans ces organisations (Groupama, Macif Finance Épargne, IMA). Je connais les contraintes réglementaires (LCB-FT, RGPD, Solvabilité II), les systèmes d\'information legacy, les processus métiers et la culture. Ce n\'est pas une posture marketing : c\'est ce qui me permet de faire des propositions concrètes plutôt que des frameworks génériques.',
+    q: 'Quel secteur accompagnez-vous ?',
+    a: 'J\'interviens dans tous les secteurs : assurance et mutuelles (mon domaine d\'origine — 23 ans en IT dans ces organisations), mais aussi banque, industrie, retail, santé, secteur public. L\'IA agentique est transverse : les architectures avec Claude, Gemini ou Copilot s\'adaptent au contexte de chaque organisation. Ce qui change selon le secteur, c\'est la connaissance des processus métiers et des contraintes réglementaires — c\'est là que mon expérience terrain fait la différence.',
   },
   {
-    q: 'Pourquoi Claude et pas ChatGPT ou Copilot ?',
-    a: 'Claude (Anthropic) dispose d\'un écosystème complet pour l\'entreprise : projets et skills, connecteurs, Claude Code pour les équipes de développement, et le Model Context Protocol (MCP) pour connecter les agents à votre SI. C\'est l\'environnement le plus abouti pour passer de l\'expérimentation à la production. Je parle aussi des autres solutions dans une logique d\'architecture, mais Claude est ma signature.',
+    q: 'Claude, Gemini, Copilot — lequel choisir pour votre organisation ?',
+    a: 'Je travaille avec les trois grands écosystèmes : Claude (Anthropic) pour sa sécurité des données, son SDK agents et son MCP — c\'est ma signature et l\'outil que je recommande pour le déploiement en production. Google Gemini pour les organisations déjà dans l\'écosystème Google Workspace. Microsoft Copilot pour les environnements Microsoft 365. Je construis des architectures qui peuvent être agnostiques au LLM selon vos contraintes. L\'objectif est toujours la production, pas l\'expérimentation.',
   },
   {
     q: 'Mes équipes n\'ont pas de profil technique — est-ce que vos formations leur conviennent ?',
@@ -139,7 +140,7 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full px-4 py-1.5 mb-8">
               <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
               <span className="tag text-cyan-400">
-                Niort&nbsp;•&nbsp;Assurance &amp; Mutuelles&nbsp;•&nbsp;IA Agentique &amp; Claude
+                Niort&nbsp;•&nbsp;Tous secteurs&nbsp;•&nbsp;IA Agentique &amp; Claude &amp; Gemini
               </span>
             </div>
 
@@ -158,9 +159,9 @@ export default function HomePage() {
             </h1>
 
             <p className="text-xl text-slate-400 leading-relaxed max-w-2xl mb-10">
-              Je forme les équipes IT et métiers des assureurs, mutuelles et institutions de prévoyance —
-              et j&apos;accompagne le déploiement de leurs agents Claude.
-              <strong className="text-slate-300"> 23 ans dans l&apos;assurance IT, 2 livres ENI, enseignant CNAM.</strong>
+              Je forme les équipes IT et métiers des entreprises de tous secteurs —
+              et j&apos;accompagne le déploiement de leurs agents Claude, Gemini et Copilot.
+              <strong className="text-slate-300"> 23 ans en IT, 2 livres ENI, enseignant CNAM.</strong>
             </p>
 
             {/* CTA */}
@@ -521,8 +522,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="tag mb-3 text-emerald-400">Prochaine session inter-entreprises</div>
           <h2 className="text-2xl font-bold text-slate-100 mb-4">
-            {/* À COMPLÉTER : titre et date de la prochaine session inter */}
-            Formation inter-entreprises <span className="gradient-text">[À COMPLÉTER]</span>
+            Formation <span className="gradient-text">Claude Code pour les équipes IT</span>
           </h2>
           <div className="card-glass p-8 max-w-2xl mx-auto border-emerald-500/20">
             <div className="flex flex-col sm:flex-row items-center gap-6">
@@ -530,14 +530,34 @@ export default function HomePage() {
                 <Calendar size={28} className="text-emerald-400" />
               </div>
               <div className="text-left">
-                <div className="font-bold text-slate-100 mb-1">[À COMPLÉTER : titre de la formation]</div>
-                <div className="text-emerald-400 text-sm mb-1">📅 [À COMPLÉTER : date] — [À COMPLÉTER : lieu ou distanciel]</div>
-                <div className="text-slate-400 text-sm">[À COMPLÉTER : description courte de la session]</div>
+                <div className="font-bold text-slate-100 mb-1">Formation Claude Code — 2 jours</div>
+                <div className="text-emerald-400 text-sm mb-1">📅 Janvier 2027 — Distanciel (Zoom) · 8 places max</div>
+                <div className="text-slate-400 text-sm">Maîtriser Claude Code, automatiser la maintenance legacy et gagner 30 à 50 % de productivité en développement.</div>
               </div>
-              <Link href="/contact" className="btn-primary text-sm whitespace-nowrap flex-shrink-0">
+              <Link href="/contact?sujet=formation-claude-code" className="btn-primary text-sm whitespace-nowrap flex-shrink-0">
                 S&apos;inscrire <ArrowRight size={14} />
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FLUX ACTUALITÉS IA ───────────────────────────── */}
+      <section className="py-20 bg-navy-800/40 border-y border-slate-800/50">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <div className="tag mb-3">Veille IA en temps réel</div>
+            <div className="cyan-line mx-auto mb-5" />
+            <h2 className="section-title mb-3">L&apos;actu Claude, Gemini &amp; IA</h2>
+            <p className="section-subtitle max-w-xl mx-auto">
+              Les dernières actualités des grands acteurs de l&apos;IA — actualisées toutes les heures.
+            </p>
+          </div>
+          <AiNewsFeedClient />
+          <div className="text-center mt-8">
+            <Link href="/blog" className="btn-outline text-sm">
+              Mes analyses sur le blog <ArrowRight size={14} />
+            </Link>
           </div>
         </div>
       </section>

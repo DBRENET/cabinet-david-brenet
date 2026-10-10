@@ -62,7 +62,7 @@ export default function ContactPage() {
       if (!res.ok) throw new Error()
       setSubmitted(true)
     } catch {
-      setError("Une erreur est survenue. Veuillez réessayer ou contacter directement contact@davidbrenet.com")
+      setError("Une erreur est survenue. Veuillez réessayer ou contacter directement brenet.david@gmail.com")
     } finally {
       setLoading(false)
     }
@@ -122,8 +122,8 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <div className="text-xs text-slate-500 mb-0.5">Email</div>
-                      <a href="mailto:contact@davidbrenet.com" className="text-sm text-slate-300 hover:text-cyan-400 transition-colors">
-                        contact@davidbrenet.com
+                      <a href="mailto:brenet.david@gmail.com" className="text-sm text-slate-300 hover:text-cyan-400 transition-colors">
+                        brenet.david@gmail.com
                       </a>
                     </div>
                   </div>

@@ -7,20 +7,21 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'IA Agentique & Claude pour l\'Assurance — Guide Complet | David Brenet',
+  title: 'IA Agentique — Claude, Gemini, Copilot : Guide Complet | David Brenet',
   description:
-    'Tout comprendre sur l\'IA agentique et Claude Anthropic pour l\'assurance et les mutuelles. Définitions, architecture, cas d\'usage, MCP, SDK agents, gouvernance AI Act — le guide de référence par David Brenet, expert Claude Niort.',
+    'Tout comprendre sur l\'IA agentique et les grands modèles (Claude, Gemini, Copilot). Définitions, architecture, cas d\'usage, MCP, SDK agents, gouvernance AI Act — le guide complet par David Brenet, consultant IA agentique à Niort.',
   keywords: [
-    'IA agentique assurance',
+    'IA agentique entreprise',
     'Claude Anthropic entreprise',
-    'agents IA assurance',
+    'Google Gemini entreprise',
+    'Microsoft Copilot',
+    'agents IA entreprise',
     'Model Context Protocol MCP',
     'Claude Code DSI',
     'SDK agents Claude',
-    'IA agentique mutuelle',
-    'agent IA gestion sinistres',
     'gouvernance IA agentique',
     'formation Claude entreprise',
+    'Claude vs Gemini vs Copilot',
   ],
   alternates: { canonical: 'https://davidbrenet.com/claude-ia-agentique' },
 }
@@ -28,8 +29,8 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'IA Agentique & Claude pour l\'Assurance — Guide Complet',
-  description: 'Guide de référence sur l\'IA agentique et Claude Anthropic pour les assureurs et mutuelles',
+  headline: 'IA Agentique — Claude, Gemini, Copilot : Guide Complet',
+  description: 'Guide de référence sur l\'IA agentique et les grands modèles LLM pour l\'entreprise',
   author: {
     '@type': 'Person',
     name: 'David Brenet',
@@ -37,7 +38,7 @@ const jsonLd = {
   },
   publisher: {
     '@type': 'Organization',
-    name: 'David Brenet — IA Agentique & Claude pour l\'Assurance',
+    name: 'David Brenet — IA Agentique & Agents Claude / Gemini / Copilot',
     url: 'https://davidbrenet.com',
   },
   datePublished: '2026-01-01',
@@ -60,20 +61,20 @@ export default function ClaudeIaAgentiquePage() {
           <div className="tag mb-3">Guide de référence</div>
           <div className="cyan-line mb-6" />
           <h1 className="text-5xl md:text-6xl font-bold text-slate-100 leading-tight mb-6">
-            IA agentique &amp; Claude<br />
-            <span className="gradient-text">pour l&apos;assurance</span>
+            IA agentique &amp; agents IA<br />
+            <span className="gradient-text">Claude · Gemini · Copilot</span>
           </h1>
           <p className="text-xl text-slate-400 leading-relaxed max-w-2xl mb-8">
-            Comprendre l&apos;IA agentique, l&apos;écosystème Claude Anthropic et leurs
-            applications concrètes pour les assureurs, mutuelles et institutions de prévoyance.
-            Le guide complet par un praticien.
+            Comprendre l&apos;IA agentique, comparer les grands écosystèmes (Claude, Gemini, Copilot)
+            et passer à la production. Le guide complet — définitions, architecture, MCP, SDK agents,
+            gouvernance AI Act — par un praticien.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href="#ecosysteme-claude" className="btn-primary">
               L&apos;écosystème Claude <ArrowRight size={16} />
             </Link>
-            <Link href="#cas-usage" className="btn-outline">
-              Cas d&apos;usage assurance
+            <Link href="#comparatif-llm" className="btn-outline">
+              Claude vs Gemini vs Copilot
             </Link>
           </div>
         </div>
@@ -88,9 +89,10 @@ export default function ClaudeIaAgentiquePage() {
               ['#vs-chatbot', '2. Agentique vs chatbot'],
               ['#ecosysteme-claude', '3. L\'écosystème Claude'],
               ['#mcp', '4. Le MCP expliqué'],
-              ['#cas-usage', '5. Cas d\'usage assurance'],
-              ['#gouvernance', '6. Gouvernance & AI Act'],
-              ['#demarrer', '7. Par où commencer ?'],
+              ['#comparatif-llm', '5. Claude vs Gemini vs Copilot'],
+              ['#cas-usage', '6. Cas d\'usage concrets'],
+              ['#gouvernance', '7. Gouvernance & AI Act'],
+              ['#demarrer', '8. Par où commencer ?'],
             ].map(([href, label]) => (
               <a key={href} href={href} className="text-slate-400 hover:text-cyan-400 transition-colors">
                 {label}
@@ -361,16 +363,139 @@ export default function ClaudeIaAgentiquePage() {
         </div>
       </section>
 
-      {/* Section 5 — Cas d'usage */}
-      <section id="cas-usage" className="py-20 bg-navy-900 scroll-mt-20">
+      {/* Section 5 — Comparatif LLM */}
+      <section id="comparatif-llm" className="py-20 bg-navy-900 scroll-mt-20">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="tag mb-3">Section 5</div>
           <h2 className="text-3xl font-bold text-slate-100 mb-6">
-            Cas d&apos;usage agentiques en assurance
+            Claude, Gemini, Copilot — lequel choisir ?
+          </h2>
+          <p className="text-slate-400 leading-relaxed mb-10">
+            Il n&apos;y a pas de réponse universelle : le bon LLM dépend de votre écosystème
+            existant, de vos contraintes de sécurité et de vos cas d&apos;usage. Voici ma lecture
+            terrain après avoir travaillé avec les trois.
+          </p>
+
+          <div className="overflow-x-auto mb-10">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-slate-800">
+                  <th className="text-left py-3 pr-4 text-slate-400 font-semibold">Critère</th>
+                  <th className="text-left py-3 pr-4 text-cyan-400 font-semibold">Claude (Anthropic)</th>
+                  <th className="text-left py-3 pr-4 text-blue-400 font-semibold">Gemini (Google)</th>
+                  <th className="text-left py-3 text-purple-400 font-semibold">Copilot (Microsoft)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-800/50">
+                {[
+                  ['Sécurité des données', 'Constitutional AI, DPA RGPD, pas d\'entraînement sur vos données', 'DPA disponible, Google Cloud confidentiel', 'Intégré M365, conforme Enterprise'],
+                  ['Développement d\'agents', 'SDK officiel + MCP — le plus mature', 'Vertex AI Agent Builder — complet', 'Copilot Studio — no-code orienté'],
+                  ['Intégration SI existant', 'MCP — connexion à n\'importe quel SI', 'Google Workspace + APIs GCP', 'Power Platform + Microsoft 365'],
+                  ['Qualité de raisonnement', 'Excellent (Claude 3.7 Sonnet)', 'Excellent (Gemini 2.0 Ultra)', 'Bon (GPT-4o sous-jacent)'],
+                  ['Contexte long', '200k tokens (Claude 3)', '1M tokens (Gemini 1.5 Pro)', '128k tokens (GPT-4o)'],
+                  ['Idéal pour', 'Agents métier complexes, sécurité++', 'Org. Google, données multimodales', 'Org. Microsoft, adoption sans dev'],
+                ].map(([crit, claude, gemini, copilot]) => (
+                  <tr key={crit}>
+                    <td className="py-3 pr-4 text-slate-300 font-medium text-xs">{crit}</td>
+                    <td className="py-3 pr-4 text-slate-400 text-xs">{claude}</td>
+                    <td className="py-3 pr-4 text-slate-400 text-xs">{gemini}</td>
+                    <td className="py-3 text-slate-400 text-xs">{copilot}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5 mb-8">
+            {[
+              {
+                color: 'text-cyan-400',
+                bg: 'bg-cyan-500/10',
+                border: 'border-cyan-500/20',
+                name: 'Claude',
+                signature: 'Ma signature',
+                when: 'Quand choisir Claude ?',
+                items: [
+                  'Agents IA complexes avec logique métier',
+                  'Contraintes RGPD / données sensibles fortes',
+                  'Équipes de développement présentes',
+                  'Connexion à un SI interne via MCP',
+                  'Besoin de raisonnement long et nuancé',
+                ],
+              },
+              {
+                color: 'text-blue-400',
+                bg: 'bg-blue-500/10',
+                border: 'border-blue-500/20',
+                name: 'Gemini',
+                signature: 'Écosystème Google',
+                when: 'Quand choisir Gemini ?',
+                items: [
+                  'Organisation déjà dans Google Workspace',
+                  'Données multimodales (images, vidéos, PDF)',
+                  'Contexte très long (>200k tokens)',
+                  'Infrastructure GCP existante',
+                  'Projets avec BigQuery / Looker',
+                ],
+              },
+              {
+                color: 'text-purple-400',
+                bg: 'bg-purple-500/10',
+                border: 'border-purple-500/20',
+                name: 'Copilot',
+                signature: 'Écosystème Microsoft',
+                when: 'Quand choisir Copilot ?',
+                items: [
+                  'Organisation Microsoft 365 / Teams',
+                  'Automatisation Office (Word, Excel, Outlook)',
+                  'Adoption sans équipe dev dédiée',
+                  'Power Automate + SharePoint existants',
+                  'Premier pas IA sans infrastructure',
+                ],
+              },
+            ].map(({ color, bg, border, name, signature, when, items }) => (
+              <div key={name} className={`card-glass border ${border} p-6`}>
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className={`text-lg font-bold ${color}`}>{name}</h3>
+                  <span className={`text-xs ${color} ${bg} px-2 py-0.5 rounded-full font-medium`}>{signature}</span>
+                </div>
+                <p className="text-xs text-slate-500 mb-4">{when}</p>
+                <ul className="space-y-2">
+                  {items.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-xs text-slate-400">
+                      <CheckCircle2 size={10} className={`${color} mt-0.5 flex-shrink-0`} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="card-glass border-cyan-500/20 p-6">
+            <div className="flex gap-3">
+              <Lightbulb size={18} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-slate-400 leading-relaxed">
+                <strong className="text-slate-200">Architecture agnostique :</strong> dans les projets
+                complexes, je construis souvent des architectures qui peuvent basculer d&apos;un LLM
+                à l&apos;autre — avec des abstractions qui isolent le modèle du reste de l&apos;agent.
+                Cela protège votre investissement si les tarifs ou les performances évoluent.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 6 — Cas d'usage */}
+      <section id="cas-usage" className="py-20 bg-navy-800/40 border-y border-slate-800/50 scroll-mt-20">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="tag mb-3">Section 6</div>
+          <h2 className="text-3xl font-bold text-slate-100 mb-6">
+            Cas d&apos;usage agentiques concrets
           </h2>
           <p className="text-slate-400 leading-relaxed mb-10">
             Ces cas d&apos;usage sont réels — certains sont en production, d&apos;autres en phase
-            pilote dans des organisations que j&apos;accompagne.
+            pilote dans des organisations que j&apos;accompagne. Ils sont adaptables à tous secteurs.
           </p>
 
           <div className="grid md:grid-cols-2 gap-5">
@@ -457,16 +582,16 @@ export default function ClaudeIaAgentiquePage() {
         </div>
       </section>
 
-      {/* Section 6 — Gouvernance */}
-      <section id="gouvernance" className="py-20 bg-navy-800/40 border-y border-slate-800/50 scroll-mt-20">
+      {/* Section 7 — Gouvernance */}
+      <section id="gouvernance" className="py-20 bg-navy-900 scroll-mt-20">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <div className="tag mb-3">Section 6</div>
+          <div className="tag mb-3">Section 7</div>
           <h2 className="text-3xl font-bold text-slate-100 mb-6">
             Gouvernance, RGPD et AI Act
           </h2>
           <p className="text-slate-400 leading-relaxed mb-8">
-            Dans l&apos;assurance, la conformité n&apos;est pas une option. Voici ce que je mets en
-            place systématiquement avant tout déploiement d&apos;agent IA.
+            La conformité n&apos;est pas une option. Voici ce que je mets en place
+            systématiquement avant tout déploiement d&apos;agent IA, quel que soit le secteur.
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 mb-10">
@@ -515,10 +640,10 @@ export default function ClaudeIaAgentiquePage() {
         </div>
       </section>
 
-      {/* Section 7 — Par où commencer */}
-      <section id="demarrer" className="py-20 bg-navy-900 scroll-mt-20">
+      {/* Section 8 — Par où commencer */}
+      <section id="demarrer" className="py-20 bg-navy-800/40 border-y border-slate-800/50 scroll-mt-20">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <div className="tag mb-3">Section 7</div>
+          <div className="tag mb-3">Section 8</div>
           <h2 className="text-3xl font-bold text-slate-100 mb-6">
             Par où commencer concrètement ?
           </h2>

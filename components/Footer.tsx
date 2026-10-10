@@ -15,13 +15,12 @@ export function Footer() {
               </div>
               <div>
                 <div className="font-bold text-slate-100">David Brenet</div>
-                <div className="text-xs text-slate-400">IA Agentique • Claude • Assurance & Mutuelles</div>
+                <div className="text-xs text-slate-400">IA Agentique • Claude • Gemini • Copilot</div>
               </div>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm mb-5">
               Je forme les équipes et j&apos;accompagne le déploiement d&apos;agents IA dans les
-              organisations d&apos;assurance, de mutuelle et de finance. De la gouvernance
-              AI Act au premier agent Claude en production.
+              organisations de tous secteurs — de la gouvernance AI Act au premier agent en production.
             </p>
             <Link
               href="/ressources"
@@ -41,7 +40,7 @@ export function Footer() {
                 <Linkedin size={16} />
               </a>
               <a
-                href="mailto:contact@davidbrenet.com"
+                href="mailto:brenet.david@gmail.com"
                 aria-label="Envoyer un email à David Brenet"
                 className="w-9 h-9 rounded-lg bg-slate-800 hover:bg-cyan-500/20 hover:text-cyan-400 text-slate-400 flex items-center justify-center transition-all"
               >
@@ -94,8 +93,8 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm text-slate-400">
                 <Mail size={15} className="text-cyan-500 flex-shrink-0" />
-                <a href="mailto:contact@davidbrenet.com" className="hover:text-cyan-400 transition-colors">
-                  contact@davidbrenet.com
+                <a href="mailto:brenet.david@gmail.com" className="hover:text-cyan-400 transition-colors">
+                  brenet.david@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-3 text-sm text-slate-400">

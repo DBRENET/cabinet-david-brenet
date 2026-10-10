@@ -122,7 +122,7 @@ function ResourceForm({ resource }: { resource: typeof resources[0] }) {
         )}
       </button>
       {status === 'error' && (
-        <p className="text-xs text-red-400">Erreur — réessayez ou contactez contact@davidbrenet.com</p>
+        <p className="text-xs text-red-400">Erreur — réessayez ou contactez brenet.david@gmail.com</p>
       )}
       <div className="flex items-center gap-1.5 text-xs text-slate-600">
         <Lock size={10} />
