@@ -1,8 +1,6 @@
 import { Resend } from 'resend'
 import { NextResponse } from 'next/server'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const subjectLabels: Record<string, string> = {
   conseil: 'Conseil Stratégique IA',
   agents: 'Déploiement Agents IA',
@@ -18,6 +16,9 @@ export async function POST(req: Request) {
   const { firstName, lastName, company, role, email, phone, subject, message } = body
 
   const subjectLabel = subjectLabels[subject] ?? subject
+
+  // Instanciation à l'intérieur du handler pour éviter l'erreur au build
+  const resend = new Resend(process.env.RESEND_API_KEY)
 
   try {
     await resend.emails.send({
